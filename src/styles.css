@@ -1,0 +1,31 @@
+/* .row {
+    color:violet;
+    border: 1px solid;
+} */
+
+/* main page top nav-1 related css */
+#nav-one{
+    background: #181D27;
+    box-shadow: 0px 10px 10px #000000;
+    position: relative;
+    z-index: 1000;
+}
+
+#nav-one img{
+     background-color:#181D27;
+     position: relative;
+     left: 10px;
+    height: 35px;
+}
+
+/* main page top nav-2 related css */
+#nav-two{
+    background: #1A2130;
+    color: white;
+}
+/* 
+grid icon -
+element {
+    margin-top: 17px;
+    color: aliceblue;
+} */

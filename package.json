@@ -1,0 +1,26 @@
+{
+  "name": "artist-inme",
+  "version": "1.0.0",
+  "description": "https://dev.to/ravirajthedeveloper/how-to-use-git-and-github-for-collaborative-programming-14a3",
+  "main": "index.js",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashuto7h/Artist-InMe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashuto7h/Artist-InMe/issues"
+  },
+  "homepage": "https://github.com/Ashuto7h/Artist-InMe#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
