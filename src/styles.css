@@ -36,8 +36,9 @@
 }
 
 #nav-two>.col{
-    height: 70px;
+    height: 50px;
     overflow: hidden;
+    padding: 0px;
 }
 
 #nav-two>.col>span{
@@ -46,27 +47,34 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: 0.4s;
 }
 
 #nav-two>.col>span:nth-child(1){
-    color:#1abc9c;
-    background-color:rgba(255,255,255,0.5);
+    color:#43FFBB;
     font-size: 32px;
 
 }
 
 #nav-two>.col>span:nth-child(2){
-    background-color:#1abc9c;
+    background-color:#43FFBB;
+    border-radius: 15px 15px 0px 0px;   
 }
 
 #nav-two>.col>span:nth-child(2)>a{
     color: white;
     text-decoration: none;
     font-family:'Poppins',sans-serif;
-    font-size: 18px;
+    font-size: 1rem;
 }
 
 #nav-two>.col:hover span{
     transform: translateY(-100%);
+}
+#nav-two>.col.tab{
+    background: #212B3E;
+    margin: 0.5%;
+    margin-top: 15px;
+    border-radius: 15px 15px 0px 0px;
+
 }

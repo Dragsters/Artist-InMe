@@ -5,7 +5,7 @@
 
 <body>
     <div>
-        <div id="nav-one" class="nav ">
+        <div id="nav-one" class="nav">
             <a class="navbar-brand" href="#">
                 <img src="/assets/mainlogo.svg">
             </a>
@@ -26,9 +26,10 @@
             </ul>
         </div>
         <div id="nav-two" class="nav">
-            <div class="col d-none d-sm-block">0</div>
-            
-            <div class="col">
+            <div class="col d-none d-sm-block">
+            </div>
+
+            <div class="col tab active" onclick="dashboard()">
                 <span>
                     <i class="material-icons md-36">dashboard</i>
                 </span>
@@ -36,8 +37,8 @@
                     <a href="#">Dashboard</a>
                 </span>
             </div>
-            
-            <div class="col">
+
+            <div class="col tab" onclick="addPost()">
                 <span>
                     <i class="material-icons md-36">post_add</i>
                 </span>
@@ -45,8 +46,8 @@
                     <a href="#">Post</a>
                 </span>
             </div>
-            
-            <div class="col">
+
+            <div class="col tab" onclick="explore()">
                 <span>
                     <i class="material-icons md-36">batch_prediction</i>
                 </span>
@@ -54,8 +55,8 @@
                     <a href="#">Explore</a>
                 </span>
             </div>
-            
-            <div class="col">
+
+            <div class="col tab" onclick="messenger()">
                 <span>
                     <i class="material-icons md-36">message</i>
                 </span>
@@ -63,8 +64,8 @@
                     <a href="#">Message</a>
                 </span>
             </div>
-            
-            <div class="col">
+
+            <div class="col tab" onclick="shop()">
                 <span>
                     <i class="material-icons md-36">store</i>
                 </span>
@@ -72,8 +73,8 @@
                     <a href="#">Shop</a>
                 </span>
             </div>
-            
-            <div class="col">
+
+            <div class="col tab" onclick="profile()">
                 <span>
                     <i class="material-icons md-36">account_box</i>
                 </span>
@@ -81,10 +82,12 @@
                     <a href="#">Profile</a>
                 </span>
             </div>
-            
-            <div class="col d-none d-sm-block">0</div>
+
+            <div class="col d-none d-sm-block">
+            </div>
         </div>
     </div>
+<script type="text/javascript" src="../js/tabcontrols.js"></script>
 </body>
 
 </html>
