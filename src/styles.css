@@ -51,10 +51,15 @@
 }
 
 #nav-two>.col>span:nth-child(1){
-    color:#43FFBB;
+    color:rgba(255, 255, 255, 0.3);
     font-size: 32px;
 
 }
+
+#nav-two .active span:nth-child(1){
+    color:#43FFBB ;
+}
+
 
 #nav-two>.col>span:nth-child(2){
     background-color:#43FFBB;
@@ -62,7 +67,7 @@
 }
 
 #nav-two>.col>span:nth-child(2)>a{
-    color: white;
+    color: #1A2130;
     text-decoration: none;
     font-family:'Poppins',sans-serif;
     font-size: 1rem;
@@ -71,10 +76,10 @@
 #nav-two>.col:hover span{
     transform: translateY(-100%);
 }
+
 #nav-two>.col.tab{
     background: #212B3E;
     margin: 0.5%;
     margin-top: 15px;
     border-radius: 15px 15px 0px 0px;
-
 }

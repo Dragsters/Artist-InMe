@@ -18,7 +18,7 @@ app.get('/u', function (req, res) {
     res.sendFile('src/html/main.html', { root: __dirname });
 })
 
-app.get('/u/nav.html', function (req, res) {
-    res.sendFile('src/html/nav.html', { root: __dirname });
-});
+// app.get('/u/nav.html', function (req, res) {
+//     res.sendFile('src/html/nav.html', { root: __dirname });
+// });
 
