@@ -1,9 +1,10 @@
-var express = require('express');
-var app = express();
-var path = require('path');
+const express = require('express');
+const app = express();
+const path = require('path');
+const PORT = process.env.PORT || 3000;
 
-var server = app.listen(3000, function () {
-    console.log('Node server listening at '+ 3000);
+const server = app.listen(PORT, function () {
+    console.log('Node server listening at ', PORT);
 });
 
 app.use(express.static('src/js'));
