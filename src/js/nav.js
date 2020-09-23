@@ -1,4 +1,5 @@
 var activeclass = document.querySelectorAll('#nav-two .tab');
+
 for (var i = 0; i < activeclass.length; i++) {
     activeclass[i].addEventListener('click', activateClass);
 }
@@ -18,7 +19,6 @@ function activateClass(e) {
 
 function dashboard() {
     $('#content').load('dashboard.html');
-
 }
 function addPost() {
     $('#content').load('addpost.html');

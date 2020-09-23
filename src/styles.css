@@ -39,6 +39,7 @@
     height: 50px;
     overflow: hidden;
     padding: 0px;
+    cursor: pointer;
 }
 
 #nav-two>.col>span{
@@ -57,16 +58,13 @@
 }
 
 #nav-two .active span:nth-child(1){
-    color:#43FFBB ;
+    color:#43FFBB;
 }
 
 
 #nav-two>.col>span:nth-child(2){
     background-color:#43FFBB;
     border-radius: 15px 15px 0px 0px;   
-}
-
-#nav-two>.col>span:nth-child(2)>a{
     color: #1A2130 !important;
     text-decoration: none;
     font-family:'Poppins',sans-serif;
