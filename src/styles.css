@@ -49,9 +49,94 @@ body,html{
 #home-nav>ul>li>a:hover{
     text-decoration: underline;
 }
+/* home page section-1 animation */
 
+#home-main>.white-layer>.sec1-anime{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 92vh;
+    width: 85%;
+    color: white;
+    font-size: xxx-large;
+    font-weight: bold;
+    margin-left: 15%;
+}  
 
+#home-main .sec1-anime>.logo-animate{
+    animation-duration: 2s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+    animation-name: logo-animate;
+    animation-delay: 1s;
+}
 
+@keyframes logo-animate{
+    0% { opacity: 0;}
+    15% { opacity: 0;}
+    50%{ 
+        transform: scale(1.5) translate3d(0,-30%,0);
+        opacity: 1;
+    }
+    100% { transform: scale(1.5) translate3d(-42%,-30%,0);}
+}
+
+#home-main .sec1-anime>.h-line-animate{
+    animation-duration: 2s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+    animation-name: h-line-animate;
+    animation-delay: 0.8s;
+
+}
+@keyframes h-line-animate{
+    0%{
+        opacity: 0;
+    }
+    30%{
+        opacity: 0;
+        transform: translate3d(400%,-30%,0);
+    }
+    50%{
+        opacity: 0;
+        height: 10px;
+        border: 2px solid white;
+        transform: translate3d(400%,-30%,0);
+    }
+    74%{
+        opacity: 0.2;
+        height: 50px;
+        border: 2px solid white;
+        transform: scale(2) translate3d(400%,-30%,0);
+    }
+    100%{
+        height: 50px;
+        border: 2px solid white;
+        transform: scale(2) translate3d(-300%,-30%,0);
+    }
+}
+
+#home-main .sec1-anime>.label-button{
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    transform: translateY(-35%);
+}
+
+#home-main .sec1-anime .text-animate>.letter{
+    display: inline-block;
+    line-height: 1rem;
+}
+
+#home-main .sec1-anime .join-btn{
+    background-color: #43FFBB;
+    border-radius: 8px;
+    margin: 0px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.1ren;
+}
 /* main page top nav-1 related css */
 
 #nav-one{
@@ -62,9 +147,9 @@ body,html{
 }
 
 #nav-one img{
-     background-color:#181D27;
-     position: relative;
-     left: 10px;
+    background-color:#181D27;
+    position: relative;
+    left: 10px;
     height: 35px;
 }
 
