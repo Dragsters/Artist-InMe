@@ -14,7 +14,7 @@ body,html{
     background-color: #0d131f;
 }
 /* main background related css */
-#home-main{
+#home{
     background-image: url("/assets/feather.jpg");   
     height: 100%;
     background-position: center;
@@ -22,7 +22,7 @@ body,html{
     background-size: cover; 
 }
 
-#home-main>.white-layer{
+#home>.white-layer{
     background-color:rgba(51, 51, 51, 0.44);
     position: absolute;
     top: 0;
@@ -51,7 +51,7 @@ body,html{
 }
 /* home page section-1 animation */
 
-#home-main>.white-layer>.sec1-anime{
+#home>.white-layer>.sec1-anime{
     align-items: center;
     justify-content: center;
     display: flex;
@@ -63,7 +63,7 @@ body,html{
     margin-left: 15%;
 }  
 
-#home-main .sec1-anime>.logo-animate{
+#home .sec1-anime>.logo-animate{
     animation-duration: 2s;
     transition-timing-function: ease-in;
     animation-fill-mode: both;
@@ -81,7 +81,7 @@ body,html{
     100% { transform: scale(1.5) translate3d(-42%,-30%,0);}
 }
 
-#home-main .sec1-anime>.h-line-animate{
+#home .sec1-anime>.h-line-animate{
     animation-duration: 2s;
     transition-timing-function: ease-in;
     animation-fill-mode: both;
@@ -116,7 +116,7 @@ body,html{
     }
 }
 
-#home-main .sec1-anime>.label-button{
+#home .sec1-anime>.label-button{
     font-size: 1.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -124,18 +124,63 @@ body,html{
     transform: translateY(-35%);
 }
 
-#home-main .sec1-anime .text-animate>.letter{
+#home .sec1-anime .text-animate>.letter{
     display: inline-block;
     line-height: 1rem;
 }
 
-#home-main .sec1-anime .join-btn{
+#home .sec1-anime .join-btn{
     background-color: #43FFBB;
     border-radius: 8px;
     margin: 0px;
     font-size: 1.4rem;
     font-weight: 400;
-    letter-spacing: 0.1ren;
+    letter-spacing: 0.1rem;
+}
+
+
+/* sign in up html file related css */
+#sign-in-up{
+    background-color: #1A2130;
+    border-radius: 25px;
+}
+
+#sign-in-up .toggle-box{
+    padding: 3px;
+    width: 40%;
+    margin: 3vh auto;
+    float: right;
+    position: relative;
+    background-color: #2A3747;
+    box-shadow: 0px 5px 2px #15191C;
+    border-radius: 30px; 
+}
+
+#sign-in-up .toggle-box>.btn-layer{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background:#13B96D;
+    border-radius: 30px;
+    transition: .5s;
+    box-shadow: 0px 5px 2px #15191C;
+}
+
+#sign-in-up .toggle-box .toggle-btn{
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    font-size: 1rem;
+    margin-inline: 4%;
+}
+
+#sign-in-up #carousel{
+    border-right: 1px solid white;
 }
 /* main page top nav-1 related css */
 
@@ -152,6 +197,7 @@ body,html{
     left: 10px;
     height: 35px;
 }
+
 
 /* main page top nav-2 related css */
 #nav-two{

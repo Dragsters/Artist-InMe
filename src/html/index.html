@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div id=home-main>
+    <div id=home>
         <div class="white-layer">
             <div id="home-nav" class="nav">
                 <a class="navbar-brand ml-3" href="/">
@@ -50,10 +50,40 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <a href="/u">main page</a>
+
+    <footer class="page-footer font-small special-color-dark pt-4">
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="!">Link 1</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/u">main page</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        </div>
+    </footer>
+
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -67,37 +97,7 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            new WOW().init();
-        });
-        var textWrapper = document.querySelector('.label-button .text-animate');
-        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-        anime.timeline({ loop: false })
-            .add({
-                targets: '.label-button .text-animate .letter',
-                translateX: [40, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutExpo",
-                duration: 1200,
-                delay: (el, i) => 3000 + 50 * i
-            });
-            // for reversing the same animation.
-            // }).add({
-            //     targets: '.label-button .text-animate .letter',
-            //     translateX: [0, -30],
-            //     opacity: [1, 0],
-            //     easing: "easeInExpo",
-            //     duration: 1100,
-            //     delay: (el, i) => 100 + 30 * i
-            // });
-
-    </script>
-
-
+    <script type="text/javascript" src="../js/index.js"></script>
 </body>
 
 </html>
