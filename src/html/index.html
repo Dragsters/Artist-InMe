@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Artist In Me</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- <meta http-equiv="refresh" content="50"> -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div id=home-main>
+        <div class="white-layer">
+            <div id="home-nav" class="nav">
+                <a class="navbar-brand ml-3" href="/">
+                    <img src="/assets/mainlogo.svg">
+                </a>
+                <ul class="nav ml-auto nav-flex-icons p-3">
+                    <li class="nav-item m-2">
+                        <a href="#">About us</a>
+                    </li>
+
+                    <li class="nav-item m-2">
+                        <a href="#">Sign up</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a href="#">Sign in</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sec1-anime">
+                <img class="logo-animate" src="/assets/mainlogo.svg">
+                <div class="h-line-animate"></div>
+                <div class="label-button">
+                    <span class="text-animate"> let the artist come out</span>
+                    <br>
+                    <button type="button" class="join-btn animated fadeIn delay-4s btn">join now</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="/u">main page</a>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            new WOW().init();
+        });
+        var textWrapper = document.querySelector('.label-button .text-animate');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({ loop: false })
+            .add({
+                targets: '.label-button .text-animate .letter',
+                translateX: [40, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 3000 + 50 * i
+            });
+            // for reversing the same animation.
+            // }).add({
+            //     targets: '.label-button .text-animate .letter',
+            //     translateX: [0, -30],
+            //     opacity: [1, 0],
+            //     easing: "easeInExpo",
+            //     duration: 1100,
+            //     delay: (el, i) => 100 + 30 * i
+            // });
+
+    </script>
+
+
+</body>
+
+</html>
