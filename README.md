@@ -3,8 +3,10 @@ a web app for visual artists to share their arts, showcase their talents, like, 
 chat with them, and also sell their products.
 
 currently under development.
+
 unstable for mobile and small devices.
-see the dev deployment here[artist-inme.herokuapp.com]
+
+see the dev deployment on [heroku](https://artist-inme.herokuapp.com)
 
 ## how to generate build
 ##### steps:
