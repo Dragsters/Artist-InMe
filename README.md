@@ -6,8 +6,6 @@ currently under development.
 
 unstable for mobile and small devices.
 
-see the dev deployment on [heroku](https://artist-inme.herokuapp.com)
-
 ## how to generate build
 ##### steps:
 1. clone repository
