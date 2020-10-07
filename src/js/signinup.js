@@ -6,6 +6,7 @@ var btn_layer = document.getElementsByClassName("btn-layer");
 var toggle_btn = document.getElementsByClassName("toggle-btn")
 var btn_signin = toggle_btn[0];
 var btn_signup = toggle_btn[1];
+
 function signup() {
     sign_in_up_form[0].style.transform = "translateX(-50%)";
     signup_form[0].style.opacity = 1;
