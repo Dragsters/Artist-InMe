@@ -9,10 +9,15 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-body,html{
+body#index,html#index{
     height: 100%;
-    background-color: #0d131f;
 }
+
+body,html{
+    background-color: #0d131f;
+    padding: 1px;
+}
+
 /* main background related css */
 #home{
     background-image: url("/assets/feather.jpg");   
@@ -58,7 +63,7 @@ body,html{
     height: 92vh;
     width: 85%;
     color: white;
-    font-size: xxx-large;
+    font-size: xx-large;
     font-weight: bold;
     margin-left: 15%;
 }  
@@ -143,6 +148,8 @@ body,html{
 #sign-in-up{
     background-color: #1A2130;
     border-radius: 25px;
+    height: 84vh;
+    color: white;
 }
 
 #sign-in-up .toggle-box{
@@ -162,26 +169,107 @@ body,html{
     position: absolute;
     width: 50%;
     height: 100%;
-    background:#13B96D;
+    background:#43FFBB;
     border-radius: 30px;
-    transition: .5s;
+    transition: .5s ease-in-out;
     box-shadow: 0px 5px 2px #15191C;
 }
 
 #sign-in-up .toggle-box .toggle-btn{
     cursor: pointer;
-    color: white;
     background: transparent;
     border: 0;
     outline: none;
     position: relative;
     font-size: 1rem;
+    font-weight:400;
+    letter-spacing: 0rem;
     margin-inline: 4%;
 }
-
-#sign-in-up #carousel{
-    border-right: 1px solid white;
+#sign-in-up .toggle-box .toggle-btn:nth-child(1){
+    color: #0d131f;
 }
+
+#sign-in-up #carousel-side,
+#sign-in-up .form-side{
+    height: 74vh;
+}
+
+#sign-in-up #carousel-side .carousel-inner {
+    max-width: 83%;
+}
+#sign-in-up .form-side{
+    overflow-x: hidden; 
+    transition: all 0.5s ease-in-out;
+}
+
+#sign-in-up .sign-in-up-form{
+    width: 200%;
+    display: flex;
+    position: relative;
+    top: 5%;
+    transition: all 0.5s ease-in-out;
+}
+
+#sign-in-up .sign-in-up-form>.signin-form-div{
+    top: 5%;
+}
+
+#sign-in-up .sign-in-up-form>.signin-form-div,
+#sign-in-up .sign-in-up-form>.signup-form-div{
+    transition: all 1s ease-in-out;
+}
+
+#sign-in-up .sign-btn{
+    background-color: #43FFBB;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    font-size: medium;
+    text-transform: none;
+    color: #0d131f;
+}
+#sign-in-up .create-btn{
+    text-decoration: underline;
+}
+#sign-in-up .create-btn:hover,
+#sign-in-up .forget-btn:hover
+{
+    color: #43FFBB;
+    cursor: pointer;
+}
+
+
+
+/*bootstrap md form related css */
+.form-control,
+.form-control:focus{
+    color: white;
+}
+
+.md-form .prefix.active,
+.md-form label.active,
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly]) + label
+{
+    color:#43FFBB;
+}
+
+.md-form .prefix{
+    color: grey;
+}
+
+.md-form input[type="email"]:not(.browser-default).valid,
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="password"]:not(.browser-default).valid,
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly])
+{
+        border-bottom: 1px solid #43FFBB;
+        -webkit-box-shadow: 0 1px 0 0 #43FFBB;
+        box-shadow: 0 1px 0 0 #43FFBB;
+        
+}
+
 /* main page top nav-1 related css */
 
 #nav-one{
