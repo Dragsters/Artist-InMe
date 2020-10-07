@@ -1,7 +1,7 @@
 
 var sign_in_up_form = document.getElementsByClassName("sign-in-up-form");
-var signin_form = document.getElementsByClassName("signin-form");
-var signup_form = document.getElementsByClassName("signup-form");
+var signin_form = document.getElementsByClassName("signin-form-div");
+var signup_form = document.getElementsByClassName("signup-form-div");
 var btn_layer = document.getElementsByClassName("btn-layer");
 var toggle_btn = document.getElementsByClassName("toggle-btn")
 var btn_signin = toggle_btn[0];
