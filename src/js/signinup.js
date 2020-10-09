@@ -28,6 +28,7 @@ function signin() {
 function forgot() {
     alert('processing...');
 }
+
 var signInMode = false;
 fetch('http://localhost:3000/signmode')
     .then((response) => {
@@ -52,8 +53,30 @@ $("#signin-form").submit(function (e) {
             'Content-Type': 'application/json',
         },
     })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
+});
+
+$("#signup-form").submit(function (e) {
+    e.preventDefault();
+    var inputvals = $('#signup-form input').serializeArray();
+    var data = {
+        email: inputvals[0].value,
+        username: inputvals[1].value,
+        password: inputvals[2].value
+    }
+
+    fetch('http://localhost:3000/create_user', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
 });

@@ -90,14 +90,14 @@
                             <h2>Welcome Back</h2>
                             <div class="md-form">
                                 <i class="fas fa-user prefix"></i>
-                                <input type="email" name="email" class="form-control validate">
+                                <input type="email" required name="email" class="form-control validate">
                                 <label data-error="wrong" data-success="right">
                                     Username or Email
                                 </label>
                             </div>
                             <div class="md-form mb-0">
                                 <i class="fas fa-lock prefix"></i>
-                                <input type="password" name="pass" class="form-control validate mb-0">
+                                <input type="password" required name="pass" class="form-control validate mb-0">
                                 <label data-error="wrong" data-success="right">
                                     Password
                                 </label>
@@ -113,7 +113,41 @@
 
                     <div class="signup-form-div col">
                         <form id="signup-form">
-                            <img class="m-2" src="/assets/mainlogo.svg">
+                            <img class="m-0" src="../assets/mainlogo.svg">
+                            <div class="md-form">
+                                <i class="fas fa-envelope prefix"></i>
+                                <input type="email" required name="email" class="form-control validate">
+                                <label data-error="wrong" data-success="right">
+                                    Email
+                                </label>
+                                <div class="hidden"></div>
+                            </div>
+                            <div class="md-form">
+                                <i class="fas fa-user prefix"></i>
+                                <input type="text" required name="email" class="form-control validate">
+                                <label data-error="wrong" data-success="right">
+                                    Username
+                                </label>
+                                <div class="hidden"></div>
+                            </div>
+                            <div class="md-form mb-0">
+                                <i class="fas fa-lock prefix"></i>
+                                <input type="password" required name="pass" class="form-control validate mb-0">
+                                <label data-error="wrong" data-success="right">
+                                    Password
+                                </label>
+                                <div class="hidden"></div>
+                            </div>
+                            <div class="md-form mb-0">
+                                <i class="fas fa-lock prefix"></i>
+                                <input type="password" required name="pass" class="form-control validate mb-0">
+                                <label data-error="wrong" data-success="right">
+                                    Confirm Password
+                                </label>
+                                <div class="hidden"></div>
+                            </div>
+                            <br>
+                            <button class="btn sign-btn py-1 px-4 ml-0" type="submit">Sign In</button>
                         </form>
                     </div>
                 </div>
