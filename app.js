@@ -60,7 +60,19 @@ app.get('/signmode', function (req, res) {
 // post requests 
 app.post('/auth', function (req, res) {
     console.log(req.body);
-    res.send(JSON.stringify({ message: "auth req reached." }));
+    var sql = "select * from user where (username = ? or email = ?) and password = ?";
+    var values = [mysql.escape(req.body.user), mysql.escape(req.body.user), mysql.escape(req.body.pass)];
+    conn.query(sql, values, function (err, result) {
+        if (err) {
+            // res.send(JSON.stringify({ message: "failed" }));
+            throw err;
+        }
+        console.log(result);
+        if (result.length > 0)
+            res.send(JSON.stringify({ message: "found" }));
+        else
+            res.send(JSON.stringify({ message: "not found" }));
+    });
 });
 
 app.post('/create_user', function (req, res) {
@@ -73,7 +85,7 @@ app.post('/create_user', function (req, res) {
             throw err;
         }
         console.log("inserted user :", req.body.username);
+        res.send(JSON.stringify({ message: "success" }));
     });
-    res.send(JSON.stringify({ message: "success" }));
 });
 
