@@ -20,11 +20,11 @@ body,html{
 
 /* main background related css */
 #home{
-    background-image: url("/assets/feather.jpg");   
+    background-image: url("/assets/feather.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
 }
 
 #home>.white-layer{
@@ -66,7 +66,7 @@ body,html{
     font-size: xx-large;
     font-weight: bold;
     margin-left: 15%;
-}  
+}
 
 #home .sec1-anime>.logo-animate{
     animation-duration: 2s;
@@ -79,7 +79,7 @@ body,html{
 @keyframes logo-animate{
     0% { opacity: 0;}
     15% { opacity: 0;}
-    50%{ 
+    50%{
         transform: scale(1.5) translate3d(0,-30%,0);
         opacity: 1;
     }
@@ -160,7 +160,7 @@ body,html{
     position: relative;
     background-color: #2A3747;
     box-shadow: 0px 5px 2px #15191C;
-    border-radius: 30px; 
+    border-radius: 30px;
 }
 
 #sign-in-up .toggle-box>.btn-layer{
@@ -199,7 +199,7 @@ body,html{
     max-width: 83%;
 }
 #sign-in-up .form-side{
-    overflow-x: hidden; 
+    overflow-x: hidden;
     transition: all 0.5s ease-in-out;
 }
 
@@ -267,7 +267,7 @@ body,html{
         border-bottom: 1px solid #43FFBB;
         -webkit-box-shadow: 0 1px 0 0 #43FFBB;
         box-shadow: 0 1px 0 0 #43FFBB;
-        
+
 }
 
 /* main page top nav-1 related css */
@@ -291,7 +291,7 @@ body,html{
 #nav-two{
     background: #1A2130;
     color: white;
-    box-shadow: 0px 7px 7px #000000;   
+    box-shadow: 0px 7px 7px #000000;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -326,7 +326,7 @@ body,html{
 
 #nav-two>.col>span:nth-child(2){
     background-color:#43FFBB;
-    border-radius: 15px 15px 0px 0px;   
+    border-radius: 15px 15px 0px 0px;
     color: #1A2130 !important;
     text-decoration: none;
     font-family:'Poppins',sans-serif;
@@ -342,4 +342,12 @@ body,html{
     margin: 0.5%;
     margin-top: 15px;
     border-radius: 15px 15px 0px 0px;
+}
+
+#profile {
+    background-color: #1A2130;
+    border-radius: 25px;
+    height: 84vh;
+    color: white;
+    margin-top: 10px;
 }
