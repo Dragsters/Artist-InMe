@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 var activeclass = document.querySelectorAll('#nav-two .tab');
 
 for (var i = 0; i < activeclass.length; i++) {
@@ -17,22 +19,10 @@ function activateClass(e) {
     }
 }
 
-function dashboard() {
-    $('#content').load('dashboard.html');
-}
-function addPost() {
-    $('#content').load('addpost.html');
-}
-function explore() {
-    $('#content').load('explore.html');
-}
-function messenger() {
-    $('#content').load('messenger.html');
-}
-function shop() {
-    $('#content').load('shop.html');
-}
-function profile() {
-    $('#content').load('profile.html');
+function getContent(Url) {
+    $('#content').load('loader.html');
+    $.get('/u/' + Url, function (html) {
+        $('#content').html(html);
+    });
 }
 

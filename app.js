@@ -15,8 +15,11 @@ app.use(express.static('src/js'));
 app.use(express.static('src'));
 app.use(express.static('src/html'));
 app.use('/assets', express.static('assets'));
+app.use(express.static('src/ejs'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
 // db connection
 const conn = mysql.createConnection({
@@ -56,7 +59,10 @@ app.get('/signmode', function (req, res) {
     res.send(JSON.stringify({ signin: signin }))
 });
 
-
+app.get('/u/dashboard', function(req,res){
+    console.log('requested dashboard')
+    res.render('dashboard.ejs', {value : "works"});
+})
 // post requests 
 app.post('/auth', function (req, res) {
     console.log(req.body);

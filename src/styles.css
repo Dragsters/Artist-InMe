@@ -343,3 +343,43 @@ body,html{
     margin-top: 15px;
     border-radius: 15px 15px 0px 0px;
 }
+
+/* dashboard related css 
+
+#content{
+    font-family: ;
+} */
+
+#content .row {
+    margin: 0px;
+}
+
+#dash-layout .sec-1,
+#dash-layout .sec-3{
+    margin: 10px;
+    height: 76vh;
+    border-radius: 25px;
+    background-color: #212B3E;
+}
+
+#dash-layout .sec-2 .add-post-button,
+#dash-layout .sec-2 .post{
+    margin: 10px;
+    border-radius: 25px;
+    background-color: #212B3E;
+}
+#dash-layout .sec-11,
+#dash-layout .sec-12,
+#dash-layout .sec-31,
+#dash-layout .sec-32{
+    height: 38vh;
+}
+
+#content .head{
+    font-size: medium;
+    color: #43ffbb;
+    font-weight: bold;
+    position: relative;
+    top: 8px;
+}
+

@@ -1,4 +1,3 @@
-
 var sign_in_up_form = document.getElementsByClassName("sign-in-up-form");
 var signin_form = document.getElementsByClassName("signin-form-div");
 var signup_form = document.getElementsByClassName("signup-form-div");
@@ -80,3 +79,4 @@ $("#signup-form").submit(function (e) {
             console.log(data);
         });
 });
+
