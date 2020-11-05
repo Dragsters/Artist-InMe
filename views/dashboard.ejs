@@ -14,23 +14,83 @@
         <div class="col-2 sec-1 d-none d-lg-block">
             <div class="sec-11">
                 <span class="head">Followed Categories</span>
+                <div class="category-items">
+                    <%  for(var i =0; i<10; i++) {%>
+                    <span class="category-text">Category <%=i%></span>
+                    <%}%>
+            </div>
             </div>
             <div class="sec-12">
                 <span class="head">Followed Peoples</span>
+                <div class="people-items">
+                    
+                    <%  for(var i =0; i<10; i++) {%>
+                    <div class="row people-text">
+                        <span class="nav-item avatar">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                        </span>
+                        &nbsp;
+                        <span>People <%=i%></span>
+                    </div>
+                    <%}%>
+            </div>
             </div>
         </div>
 
         <div class="col sec-2">
-            <div class="row add-post-button" onclick="gotoAddPost()">
-                add a new post
-            </div>
-            <div class="post-list">
-                <div class="post">
-                    post
+            <div class="row add-post-button p-2" onclick="gotoAddPost()">
+                <div class="col-2">
+                    <span class="nav-item avatar">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                        class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </span>
+                </div>
+                
+                <div class="col text-center ">
+                    <span class="mt-4" onclick="" > Add a new post</span>
+                </div>
+                <div class="col-2 text-center ">
+                    <i class="fas fa-plus pr-3"></i>
                 </div>
             </div>
-        </div>
+            <div class="post-list">
+                <% for(var i=0; i<10; i++) {%>
+                    <div class="post">
+                        <div class="row people-text p-3">
+                            <span class="nav-item avatar">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                    class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                            </span>
+                            
+                            <span class="ml-3">People <%=i%></span>
+                            <span class="options"><i class="fas fa-ellipsis-h"></i></span>
+                        </div>
+                        <div class="post-content">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded img-fluid" alt="avatar image">
+                            </div>
+                        <div class="row">
+                            <div class="col ">
+                                <div class="row justify-content-center">Likes</div>
+                                <div class="row justify-content-center">1.2k</div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">Comments</div>
+                                <div class="row justify-content-center">23</div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">Shares</div>
+                                <div class="row justify-content-center">12</div>
+                            </div>
+                        </div>
+                    </div>
 
+
+                    <%}%>
+            </div>
+        </div>
+        
         <div class="col-md-3 col-lg-2 sec-3 d-none d-md-block">
             <div class="sec-31">
                 <span class="head">Notifications</span>
@@ -43,6 +103,12 @@
         <div class="col-1 d-none d-sm-block">
         </div>
     </div>
+
+<script>
+    function gotoAddPost() {
+
+    }
+</script>
 </body>
 
 </html>

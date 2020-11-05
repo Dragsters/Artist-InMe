@@ -55,12 +55,15 @@ $("#signin-form").submit(function (e) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            if (data.message === 'found')
+                location.href = '/u';
         });
 });
 
 $("#signup-form").submit(function (e) {
     e.preventDefault();
     var inputvals = $('#signup-form input').serializeArray();
+    
     var data = {
         email: inputvals[0].value,
         username: inputvals[1].value,
@@ -77,6 +80,15 @@ $("#signup-form").submit(function (e) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            if (data.errno === 1062) {
+                var sqlMessage = data.sqlMessage;
+                console.log(typeof (sqlMessage));
+                if (sqlMessage.includes('username'))
+                    alert('username already exist');
+                else alert('email already exist');
+            }
+            if(data.message === 'success')
+                location.href = '/u';
         });
 });
 

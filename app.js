@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const db = require('./db.config');
+const cookieParser = require('cookie-parser');
 
 
 const server = app.listen(PORT, function () {
@@ -19,6 +20,7 @@ app.use(express.static('src/ejs'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // db connection
@@ -59,9 +61,14 @@ app.get('/signmode', function (req, res) {
     res.send(JSON.stringify({ signin: signin }))
 });
 
-app.get('/u/dashboard', function(req,res){
+app.get('/u/dashboard', function (req, res) {
     console.log('requested dashboard')
-    res.render('dashboard.ejs', {value : "works"});
+    res.render('dashboard.ejs', { value: "works" });
+});
+
+app.get('/getcookie/:cookie', function (req, res) {
+    console.log(req.query.cookie);
+
 })
 // post requests 
 app.post('/auth', function (req, res) {
@@ -69,15 +76,15 @@ app.post('/auth', function (req, res) {
     var sql = "select * from user where (username = ? or email = ?) and password = ?";
     var values = [mysql.escape(req.body.user), mysql.escape(req.body.user), mysql.escape(req.body.pass)];
     conn.query(sql, values, function (err, result) {
-        if (err) {
-            // res.send(JSON.stringify({ message: "failed" }));
+        if (err)
             throw err;
-        }
         console.log(result);
-        if (result.length > 0)
-            res.send(JSON.stringify({ message: "found" }));
+        if (result.length > 0) {
+            res.cookie('userid', result[0].user_Id);
+            return res.send(JSON.stringify({ message: "found" }));
+        }
         else
-            res.send(JSON.stringify({ message: "not found" }));
+            return res.send(JSON.stringify({ message: "not found" }));
     });
 });
 
@@ -87,11 +94,14 @@ app.post('/create_user', function (req, res) {
     var values = [[mysql.escape(req.body.email), mysql.escape(req.body.username), mysql.escape(req.body.password)]];
     conn.query(sql, [values], function (err, result) {
         if (err) {
-            res.send(JSON.stringify({ message: "failed" }));
-            throw err;
+            console.log(err);
+            // duplicate entry error.
+            if (err.errno === 1062)
+                return res.send(JSON.stringify({ message: "failed", errno: 1062, sqlMessage: err.sqlMessage }));
         }
+        res.cookie('userid', result.insertId);
         console.log("inserted user :", req.body.username);
-        res.send(JSON.stringify({ message: "success" }));
+        return res.send(JSON.stringify({ message: "success" }));
     });
 });
 
