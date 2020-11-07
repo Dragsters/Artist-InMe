@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <div id="addpost-layout" class="row">
+        <div class="col-1"></div>
+        <div class="col-4 sec-1">
+            <br>
+            <div class="row">
+                <div class="col"></div><span class="nav-item avatar ">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                        alt="avatar image" height="120">
+                </span>
+                <div class="col"></div>
+            </div>
+            <div class="row justify-content-center font-weight-bold">
+                Name
+            </div>
+            <div class="row justify-content-center">
+                Status Line
+            </div>
+
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    business_center</i>
+                Profession
+                <span>Handicraft Artist</span>
+            </div>
+
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    place</i>
+                From
+                <span>Bhopal, M.P. India</span>
+            </div>
+
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    directions_run</i>
+                Followers
+                <span>920</span>
+            </div>
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    post_add</i>
+                Posts
+                <span>102</span>
+            </div>
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    share</i>
+                Shared
+                <span>32</span>
+            </div>
+            <div class="row intro">
+                <i class="material-icons m-36">
+                    group</i>
+                Peoples you Follow
+                <span>9</span>
+            </div>
+            <div class="row intro">
+                <i class="material-icons">
+                    table_rows</i>
+                Categories you follow
+                <span>3</span>
+            </div>
+        </div>
+        <div class="col sec-2">
+            <br>
+            <div class="md-form green-textarea active-green-textarea-2">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <textarea class="md-textarea form-control" rows="3"></textarea>
+                <label for="form17">Write here</label>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+                <div id="image-btn" class="btn add-btn py-1 px-4 ml-0" onclick="uploadfile()">
+                    <i class="material-icons">add_a_photo</i>
+                    <input id="img-file" type="file" style="display: none;" accept="image/*, video/*">
+                </div>
+                <div class="btn add-btn py-1 px-4 ml-0" onclick="submitPost()">
+                    Post
+                </div>
+            </div>
+
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+    <script>
+        function uploadfile() { 
+            document.getElementById("img-file").click();
+
+        }
+    </script>
+</body>
+
+</html>

@@ -62,8 +62,12 @@ app.get('/signmode', function (req, res) {
 });
 
 app.get('/u/dashboard', function (req, res) {
-    console.log('requested dashboard')
-    res.render('dashboard.ejs', { value: "works" });
+    res.render('dashboard.ejs');
+});
+
+
+app.get('/u/addpost', function (req, res) {
+    res.render('post.ejs');
 });
 
 app.get('/getcookie/:cookie', function (req, res) {

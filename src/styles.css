@@ -419,33 +419,139 @@ body,html{
 }
 
 #dash-layout .sec-11 .category-text,
-#dash-layout .sec-12 .people-text
-{
+#dash-layout .sec-12 .people-text,
+#dash-layout .sec-31 .notif-text,
+#dash-layout .sec-32 .people-text{
     display: block;
     margin: 5px;
     padding: 5px;
+    cursor: pointer;
 }
 
+#dash-layout .sec-31 .notif-text,
+#dash-layout .sec-32 .people-text{
+    border-bottom: 1px solid #2A3747;
+}
+
+#dash-layout .sec-31 .notif-text{
+    font-size: small;
+}
+
+#dash-layout .sec-11 .category-text:hover,
+#dash-layout .sec-12 .people-text:hover,
+#dash-layout .sec-32 .people-text:hover
+{
+    font-weight: bold;
+}
 
 #dash-layout .sec-11 .category-items,
-#dash-layout .sec-12 .people-items{
+#dash-layout .sec-12 .people-items,
+#dash-layout .sec-31 .notif-items,
+#dash-layout .sec-32 .message-items
+{
     overflow-y: scroll;
     scrollbar-width: none;
     height: 29vh;
     margin-top: 10px;
 }
+
 #dash-layout .post-list{
     overflow-y: scroll;
     scrollbar-width: none;
     height: 71vh;
 
 }
+
 #dash-layout .post-list .post-content,
 #dash-layout .post-list .post-content>img{
     width: 100%;
-    height: 40vh;
 }
   
 #dash-layout .post-list .options{
     margin-left: auto;
+}
+
+#dash-layout .post-list .activity-row .col{
+    margin: 5px;
+}
+#dash-layout .post-list .activity-row .col:hover{
+    background-color: #1A2130;
+    color:#43ffbb;
+    border-radius: 0px 0px 25px 25px;
+    cursor: pointer;
+}
+
+#dash-layout .add-post-button:hover{
+    color: #43ffbb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#dash-layout .post-list .username{
+    font-weight: bold;
+}
+
+#dash-layout .post-list .username:hover{
+    font-weight: bold;
+    color: #43ffbb;
+    cursor: pointer;
+}
+#dash-layout .sec-3 .date {
+    font-size: x-small;
+    position: relative;
+    top: -5px;
+    left: auto;
+    right: -76%;
+}
+
+/* add post section related css */
+#addpost-layout .sec-1,
+#addpost-layout .sec-2
+{
+    margin: 10px;
+    height: 78vh;
+    border-radius: 25px;
+    background-color: #212B3E;
+}
+
+#addpost-layout .sec-1 .intro{
+    padding: 2px;
+}
+
+#addpost-layout .sec-1 .intro i{
+    margin-right: 5px;
+}
+
+#addpost-layout .sec-1 .intro span{
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+
+.active-green-textarea-2 textarea.md-textarea {
+    border-bottom: 1px solid#43ffbb;
+    box-shadow: 0 1px 0 0#43ffbb;
+}
+.active-green-textarea-2.md-form label.active {
+    color:#43ffbb;
+}
+.active-green-textarea-2.md-form label {
+    color:#43ffbb;
+}
+.active-green-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color:#43ffbb;
+}
+.green-textarea textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid#43ffbb;
+    box-shadow: 0 1px 0 0#43ffbb;
+}
+
+#addpost-layout .sec-2 .add-btn{
+    background-color: #43FFBB;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    font-size: medium;
+    text-transform: none;
+    color: #0d131f;
 }
