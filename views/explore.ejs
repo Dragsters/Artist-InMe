@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="explore-layout" class="row">
+        <div class="col-1 d-none d-sm-block">
+        </div>
+        <div class="col-2 sec-1 d-none d-lg-block">
+            <span class="head">Suggested Categories</span>
+            <div class="category-items">
+                <%  for(var i =0; i<categories.length; i++) {%>
+                <span class="category-text text-capitalize" onclick="gotoCategory()"><%=categories[i].name%></span>
+                <%}%>
+                </div>
+            
+            <!-- <div class="sec-12">
+                <span class="head">Followed Peoples</span>
+                <div class="people-items">
+                    
+                    <%  for(var i =0; i<10; i++) {%>
+                <div class="row people-text" onclick="gotoUser()">
+                    <span class="nav-item avatar">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </span>
+                    &nbsp;
+                    <span>People <%=i%></span>
+                </div>
+                <%}%>
+            </div> -->
+            </div>
+        </div>
+
+        <div class="col sec-2">
+            <div class="row add-post-button p-2" onclick="gotoAddPost()">
+                <div class="col-2">
+                    <span class="nav-item avatar">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                        class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </span>
+                </div>
+                
+                <div class="col text-center ">
+                    <span class="mt-4" onclick="" > Add a new post</span>
+                </div>
+                <div class="col-2 text-center ">
+                    <i class="fas fa-plus pr-3"></i>
+                </div>
+            </div>
+            <div class="post-list">
+                <% for(var i=0; i<10; i++) {%>
+                <div class="post">
+                    <div class="row people-text p-3">
+                        <span class="nav-item avatar">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                        </span>
+
+                        <span class="ml-3 username" onclick="gotoUser()">People <%=i%></span>
+                        <span class="options"><i class="fas fa-ellipsis-h"></i></span>
+                    </div>
+                    <div class="post-content">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded img-fluid"
+                            alt="avatar image">
+                    </div>
+                    <div class="row activity-row">
+                        <div class="col" onclick="like()">
+                            <div class="row justify-content-center">
+                                <i class="material-icons md-24">favorite_border</i>
+                            </div>
+                            <div class="row justify-content-center">1.2k</div>
+                        </div>
+                        <div class="col" onclick="comment()">
+                            <div class="row justify-content-center">
+                                <i class="material-icons md-24">speaker_notes</i>
+                            </div>
+                            <div class="row justify-content-center">23</div>
+                        </div>
+                        <div class="col" onclick="share()">
+                            <div class="row justify-content-center">
+                                <i class="material-icons md-24">share</i>
+                            </div>
+                            <div class="row justify-content-center">12</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <%}%>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-lg-2 sec-3 d-none d-md-block">
+            <div class="sec-31">
+                <span class="head">Notifications</span>
+                <div class="notif-items">
+                    <%  for(var i =0; i<10; i++) {%>
+                <div class="row notif-text" onclick="gotoNotif()">
+                    <span>notif <%=i%></span>
+                    <br>
+                    <span class="date">13 Aug</span>
+                </div>
+                <%}%>
+            </div>
+            </div>
+            <div class="sec-32">
+                <span class="head">Messages</span>
+                <div class="message-items">
+                    
+                    <%  for(var i =0; i<10; i++) {%>
+                <div class="row people-text" onclick="gotoMessage()">
+                    <span class="nav-item avatar">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </span>
+                    &nbsp;
+
+                    <span>People <%=i%></span>
+                    <br>
+                    <span class="date">15 Aug</span>
+
+                </div>
+                <%}%>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-1 d-none d-sm-block">
+        </div>
+    </div>
+
+<script>
+    function gotoAddPost() { }
+    function like() { }
+    function comment() { }
+    function share() { }
+    function gotoCategory() { }
+    function gotoUser() { }
+    function gotoNotif() { }
+    function gotoMessage() { }
+</script>
+</body>
+
+</html>

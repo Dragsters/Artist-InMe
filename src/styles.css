@@ -374,8 +374,9 @@ body,html{
 /* dashboard related css */
 
 #content{
-    /* font-family: ; */
+    font-family: 'Hi Melody', cursive;
     color: white;
+    font-size: large;
 } 
 
 #content .row {
@@ -383,7 +384,9 @@ body,html{
 }
 
 #dash-layout .sec-1,
-#dash-layout .sec-3{
+#dash-layout .sec-3,
+#explore-layout .sec-1,
+#explore-layout .sec-3{
     margin: 10px;
     height: 78vh;
     border-radius: 25px;
@@ -395,6 +398,7 @@ body,html{
     margin: 10px;
     border-radius: 25px;
     background-color: #212B3E;
+    font-size: x-large;
 }
 #dash-layout .sec-11,
 #dash-layout .sec-12,
@@ -409,7 +413,7 @@ body,html{
 }
 
 #content .head{
-    font-size: medium;
+    font-size:xx-large;
     color: #43ffbb;
     font-weight: bold;
     position: relative;
@@ -421,25 +425,29 @@ body,html{
 #dash-layout .sec-11 .category-text,
 #dash-layout .sec-12 .people-text,
 #dash-layout .sec-31 .notif-text,
-#dash-layout .sec-32 .people-text{
+#dash-layout .sec-32 .people-text,
+#explore-layout .sec-1 .category-text{
     display: block;
     margin: 5px;
     padding: 5px;
     cursor: pointer;
+    font-size: x-large;
 }
 
 #dash-layout .sec-31 .notif-text,
 #dash-layout .sec-32 .people-text{
     border-bottom: 1px solid #2A3747;
+    font-size: x-large;
 }
 
 #dash-layout .sec-31 .notif-text{
-    font-size: small;
+    font-size: large;
 }
 
 #dash-layout .sec-11 .category-text:hover,
 #dash-layout .sec-12 .people-text:hover,
-#dash-layout .sec-32 .people-text:hover
+#dash-layout .sec-32 .people-text:hover,
+#explore-layout .sec-1 .category-text:hover
 {
     font-weight: bold;
 }
@@ -459,14 +467,17 @@ body,html{
     overflow-y: scroll;
     scrollbar-width: none;
     height: 71vh;
+}
 
+#dash-layout .sec-2 .post .people-text .avatar>.fas{
+    color: #43ffbb;
 }
 
 #dash-layout .post-list .post-content,
 #dash-layout .post-list .post-content>img{
     width: 100%;
 }
-  
+ 
 #dash-layout .post-list .options{
     margin-left: auto;
 }
@@ -489,6 +500,7 @@ body,html{
 
 #dash-layout .post-list .username{
     font-weight: bold;
+    font-size: x-large;
 }
 
 #dash-layout .post-list .username:hover{
@@ -497,7 +509,7 @@ body,html{
     cursor: pointer;
 }
 #dash-layout .sec-3 .date {
-    font-size: x-small;
+    font-size:medium;
     position: relative;
     top: -5px;
     left: auto;
@@ -512,6 +524,10 @@ body,html{
     height: 78vh;
     border-radius: 25px;
     background-color: #212B3E;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #addpost-layout .sec-1 .intro{
@@ -554,4 +570,36 @@ body,html{
     font-size: medium;
     text-transform: none;
     color: #0d131f;
+}
+
+#preview {
+    width: 97%;
+    border-bottom: 2px #1485e8;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+/* explore section related css */
+#explore-layout .sec-1 .category-items
+{
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+/* semantic ui dropdown settings */
+.ui.label {
+    background-color: #43ffbb !important;
+}
+
+.ui.selection.dropdown{
+    background: #1a2130 !important;
+}
+
+.menu.transition.visible {
+    background: #1a2130;
+}
+
+.ui.dropdown .menu .selected.item, .ui.dropdown.selected ,
+.ui.dropdown .menu > .item{
+    color:white !important;
 }

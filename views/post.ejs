@@ -6,8 +6,8 @@
 
 <body>
     <div id="addpost-layout" class="row">
-        <div class="col-1"></div>
-        <div class="col-4 sec-1">
+        <div class="col-1 d-none d-sm-block"></div>
+        <div class="col-4 sec-1 d-none d-md-block">
             <br>
             <div class="row">
                 <div class="col"></div><span class="nav-item avatar ">
@@ -72,14 +72,22 @@
             <br>
             <div class="md-form green-textarea active-green-textarea-2">
                 <i class="fas fa-pencil-alt prefix"></i>
-                <textarea class="md-textarea form-control" rows="3"></textarea>
+                <textarea id="text" class="md-textarea form-control" rows="3"></textarea>
                 <label for="form17">Write here</label>
             </div>
-            <div class="row"></div>
+            <div id="show-img"></div>
+
+            <select id="category-select" class="ui fluid search dropdown text-capitalize" multiple="">
+                <option value="">Category</option>
+                <% for (var i=0; i<categories.length; i++){%>
+                <option  value="<%= categories[i].category_id %>"> <%= categories[i].name %></option>
+                <%}%>
+            </select>
+
             <div class="row">
-                <div id="image-btn" class="btn add-btn py-1 px-4 ml-0" onclick="uploadfile()">
+                <div id="image-btn" class="btn add-btn py-1 px-4 ml-0" onclick="inputOn()">
                     <i class="material-icons">add_a_photo</i>
-                    <input id="img-file" type="file" style="display: none;" accept="image/*, video/*">
+                    <input id="file-input" type="file" multiple style="display: none;" accept="image/*, video/*">
                 </div>
                 <div class="btn add-btn py-1 px-4 ml-0" onclick="submitPost()">
                     Post
@@ -87,15 +95,10 @@
             </div>
 
         </div>
-        <div class="col-1"></div>
+        <div class="col-1 d-none d-sm-block"></div>
 
     </div>
-    <script>
-        function uploadfile() { 
-            document.getElementById("img-file").click();
-
-        }
-    </script>
+    <script type="text/javascript" src="../js/post.js"></script>
 </body>
 
 </html>

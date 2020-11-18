@@ -1,6 +1,5 @@
 
 var activeclass = document.querySelectorAll('#nav-two .tab');
-console.log(activateClass);
 for (var i = 0; i < activeclass.length; i++) {
     activeclass[i].addEventListener('click', activateClass);
 }
@@ -16,7 +15,6 @@ function activateClass(e) {
             break;
         }
     }
-    console.log("in active class");
 }
 
 function getContent(Url) {
