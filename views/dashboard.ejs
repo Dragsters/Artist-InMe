@@ -67,7 +67,7 @@
                 <% if(posts.length == 0){ %>
                     Follow peoples to see their posts.
                     <%}for(var i = 0; i < posts.length; i++) {%>
-                    <div class="post">
+                    <div id="post-<%= i %>" class="post">
                         <div class="row people-text p-3">
                             <span class="nav-item avatar">
                                 <% var found = false;
@@ -129,36 +129,57 @@
                             </div>
                         </div>
                         <div class="row activity-row">
-                            <div  class="col" onclick="like(<%=posts[i].post_id%>)">
+                            <div  class="col" onclick="like(<%= posts[i].post_id %>)">
                                     <div class="row justify-content-center">
                                         <%if(likedPost.find(function(liked, index) {
                                             if(liked.post_id == posts[i].post_id)
                                                 return true;
                                         })){%>
-                                    <i id="like-i" class="material-icons md-24 unliked">favorite_border</i>
-                                    <%}else{%>
-                                    <i id="like-i" class="material-icons md-24 liked">favorite</i>
-                                    <%}%>
+                                        <i id="like-i" class="material-icons md-24 unliked">favorite_border</i>
+                                        <%}else{%>
+                                        <i id="like-i" class="material-icons md-24 liked">favorite</i>
+                                        <%}%>
                                     </div>
                                     <div id="no-likes" class="row justify-content-center">
                                         <%=posts[i].likes%>
+                                    </div>
+                            </div>
+
+                            <div id="comment-btn" class="col" onclick="comment( <%= posts[i].post_id %>, <%= i %> )">
+                                <div class="row justify-content-center">
+                                    <i class="material-icons md-24">speaker_notes</i>
+                                </div>
+                                <div id="no-comments" class="row justify-content-center"><%= posts[i].no_comments %>
+                                </div>
+                            </div>
+                            <div class="col" onclick="share(<%= posts[i].post_id%>)">
+                                <div class="row justify-content-center">
+                                    <i class="material-icons md-24">share</i>
+                                </div>
+                                <div id="no-shares" class="row justify-content-center"><%= posts[i].no_shares %></div>
                             </div>
                         </div>
-                        <div class="col" onclick="comment()">
-                            <div class="row justify-content-center">
-                                <i class="material-icons md-24">speaker_notes</i>
+                        <div class="comment-list">
+                            <div id="comment-form" class="pt-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="md-form mt-1">
+                                            <i class="fas fa-pencil-alt prefix"></i>
+                                            <input id="cmnt-input" type="text" class="form-control"
+                                                placeholder="comment">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="cmnt-submit-btn"
+                                            onclick="submitComment(<%=posts[i].post_id%>, <%=i%>)">
+                                            <i class="material-icons md-24 mt-3">send</i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row justify-content-center"><%=posts[i].no_comments%></div>
-                        </div>
-                        <div class="col" onclick="share()">
-                            <div class="row justify-content-center">
-                                <i class="material-icons md-24">share</i>
-                            </div>
-                            <div class="row justify-content-center"><%=posts[i].no_shares%></div>
                         </div>
                     </div>
-                </div>
-                <%}%>
+                    <%}%>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-2 sec-3 d-none d-md-block">
@@ -166,12 +187,12 @@
                                 <span class="head">Notifications</span>
                                 <div class="notif-items">
                                     <%  for(var i =0; i<10; i++) {%>
-                <div class="row notif-text" onclick="gotoNotif()">
-                    <span>notif <%=i%></span>
-                    <br>
-                    <span class="date">13 Aug</span>
-                </div>
-                <%}%>
+                    <div class="row notif-text" onclick="gotoNotif()">
+                        <span>notif <%=i%></span>
+                        <br>
+                        <span class="date">13 Aug</span>
+                    </div>
+                    <%}%>
             </div>
             </div>
             <div class="sec-32">
@@ -179,19 +200,19 @@
                 <div class="message-items">
                     
                     <%  for(var i =0; i<10; i++) {%>
-                <div class="row people-text" onclick="gotoMessage()">
-                    <span class="nav-item avatar">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
-                            class="rounded-circle z-depth-0" alt="avatar image" height="35">
-                    </span>
-                    &nbsp;
+                    <div class="row people-text" onclick="gotoMessage()">
+                        <span class="nav-item avatar">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                        </span>
+                        &nbsp;
 
-                    <span>People <%=i%></span>
-                    <br>
-                    <span class="date">15 Aug</span>
+                        <span>People <%=i%></span>
+                        <br>
+                        <span class="date">15 Aug</span>
 
-                </div>
-                <%}%>
+                    </div>
+                    <%}%>
             </div>
             </div>
         </div>

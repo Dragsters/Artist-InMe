@@ -481,15 +481,37 @@ body,html{
 #dash-layout .post-list .options{
     margin-left: auto;
 }
+#dash-layout .post .carousel,
+#dash-layout .post #comment-form,
+#dash-layout .post .activity-row,
+#dash-layout .post .comment {
+    border-top: 1px solid #2A3747;
+}
 
 #dash-layout .post-list .activity-row .col{
     margin: 5px;
 }
+
 #dash-layout .post-list .activity-row .col:hover{
     background-color: #1A2130;
     color:#43ffbb;
     border-radius: 0px 0px 25px 25px;
     cursor: pointer;
+}
+
+#dash-layout .post #comment-form .cmnt-submit-btn:hover{
+    color: #43ffbb;
+    cursor: pointer;
+}
+
+#dash-layout .post .comment-list .more-cmnt-btn {
+    color: #43ffbb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#dash-layout .post .comment{
+    font-size: large;
 }
 
 #dash-layout .add-post-button:hover{
@@ -516,6 +538,9 @@ body,html{
     right: -76%;
 }
 
+#dash-layout .carousel img{
+    height: 42vh;
+}
 /* add post section related css */
 #addpost-layout .sec-1,
 #addpost-layout .sec-2

@@ -153,6 +153,17 @@ app.get('/u/unlike/:post_id/:likes', function (req, res) {
     })
 });
 
+app.get('/comments/:post_id', function (req, res) {
+    console.log(req.params.post_id);
+    var sql = " select username,comment_text,date from profile join comments on profile.user_id = comments.commented_by where post_id = " + req.params.post_id;
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        return res.send(result);
+    });
+});
+
 app.get('/u/addpost', function (req, res) {
     return res.render('post', { categories: categories });
 });
@@ -163,14 +174,43 @@ app.get('/u/explore', function (req, res) {
 });
 
 app.get('/getcookie/:cookie', function (req, res) {
-    console.log(req.params.cookie);
+    var cookie = req.params.cookie;
+    console.log(req.cookies[cookie])
+    res.send(JSON.stringify({ cookie: req.cookies[cookie] }))
+});
 
-})
+app.get('/get/username/:userid', function (req, res) {
+    var sql = "select username from user where user_id = " + req.params.userid;
+    console.log(sql);
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        return res.send(JSON.stringify({ username: result[0].username }));
+    });
+});
+
 app.get('/uploads/:file', function (req, res) {
     console.log(req.params);
     res.sendFile(__dirname + '/uploads/' + req.params.file);
-})
+});
 
+app.get('/share/:postId/:userId/:noShares', function (req, res) {
+    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var noShares = parseInt(req.params.noShares);
+    var sql1 = "insert into shared values ?;";
+    var sql2 = "update post set no_shares =" + noShares + " where created_by = " + req.params.userId;
+    var values = [[date, req.params.postId, req.params.userId]];
+    conn.query(sql1 + sql2, [values], function (err, result) {
+        if (err) {
+            if (err.errno == 1062)
+                return res.send(JSON.stringify({ success: false, message: "You Can Share a Post Only Once" }));
+            console.log(err);
+        }
+        console.log(result);
+        return res.send(JSON.stringify({ success: true, message: "You Reshared a Post" }));
+    });
+});
 
 // post requests 
 // ==============
@@ -242,4 +282,17 @@ app.post('/submitpost', function (req, res) {
         });
     });
     return res.send(JSON.stringify({ message: "success" }));
+});
+
+app.post('/addcomment', function (req, res) {
+    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var sql1 = "insert into comments values ?;";
+    var sql2 = "update post set no_comments = " + req.body.noComments + " where post_id = " + req.body.postId;
+    var values = [[mysql.escape(req.body.commentText), req.body.postId, req.body.userid, date]]
+    conn.query(sql1 + sql2, [values], function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        return res.send(JSON.stringify({ success: true }));
+    })
 });
