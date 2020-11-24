@@ -343,6 +343,21 @@ body,html{
     margin-top: 15px;
     border-radius: 15px 15px 0px 0px;
 }
+
+.dropdown-toggle::after{
+    display: none;
+}
+
+.dropdown-item:hover{
+    background:#2A3747;
+    color: white;
+}
+.dropdown-item{
+    color: white;
+}
+.dropdown-menu{
+    background-color: #181D27;
+}
 /* loader related css */
 .loader {
     height: 80%;
@@ -541,9 +556,12 @@ body,html{
 #dash-layout .carousel img{
     height: 42vh;
 }
+
 /* add post section related css */
 #addpost-layout .sec-1,
-#addpost-layout .sec-2
+#addpost-layout .sec-2,
+#messenger-layout .sec-1,
+#messenger-layout .sec-2
 {
     margin: 10px;
     height: 78vh;
@@ -557,6 +575,7 @@ body,html{
 
 #addpost-layout .sec-1 .intro{
     padding: 2px;
+    font-size: x-large;
 }
 
 #addpost-layout .sec-1 .intro i{
@@ -566,6 +585,35 @@ body,html{
 #addpost-layout .sec-1 .intro span{
     font-weight: bold;
     margin-left: 5px;
+}
+
+#addpost-layout .sec-1 .name,
+#addpost-layout .sec-2 label
+{
+    font-size: xx-large;
+}
+
+#addpost-layout .sec-2 .ui 
+{ 
+    font-size : large;
+}
+
+#addpost-layout .sec-2 .ui.dropdown .menu .item{
+font-size: x-large;
+}
+
+#addpost-layout .sec-1 i{
+    color: #43ffbb;
+}
+
+#addpost-layout .sec-2 .add-btn{
+    background-color: #43FFBB;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    font-size: x-large;
+    text-transform: none;
+    color: #0d131f;
 }
 
 
@@ -585,16 +633,6 @@ body,html{
 .green-textarea textarea.md-textarea:focus:not([readonly]) {
     border-bottom: 1px solid#43ffbb;
     box-shadow: 0 1px 0 0#43ffbb;
-}
-
-#addpost-layout .sec-2 .add-btn{
-    background-color: #43FFBB;
-    border-radius: 30px;
-    font-weight: 400;
-    letter-spacing: 0.05rem;
-    font-size: medium;
-    text-transform: none;
-    color: #0d131f;
 }
 
 #preview {
@@ -627,4 +665,18 @@ body,html{
 .ui.dropdown .menu .selected.item, .ui.dropdown.selected ,
 .ui.dropdown .menu > .item{
     color:white !important;
+}
+
+/* messenger section related css */
+#messenger-layout .search{
+    border-radius: 50px;
+    color:grey;
+    background-color: #1a2130;
+}
+
+#messenger-layout .search input{
+    background: #1a2130;
+    border: transparent;
+    color: white;
+    width: 86%;
 }

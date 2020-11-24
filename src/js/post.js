@@ -3,8 +3,6 @@ var uploads = "";
 document.getElementById("file-input").onchange = function () {
     const input = document.getElementById('file-input');
     const fd = new FormData();
-
-    console.log(input.files.length);
     for (var i = 0; i < input.files.length; i++)
         fd.append('files', input.files[i]);
     fetch('/uploadfile', {
@@ -28,9 +26,7 @@ document.getElementById("file-input").onchange = function () {
                 var imgNode = "<img id ='preview' src='" + url + "'>";
                 $('#show-img').append(imgNode);
                 $('#show-img').append('<hl>');
-
             }
-            console.log(uploads);
         })
         .catch(err => console.log(err));
 };
@@ -57,7 +53,6 @@ function submitPost() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
         });
     alert('you shared a new post');
 }

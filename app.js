@@ -62,18 +62,34 @@ conn.query(sql, function (err, result) {
 
 
 // get requests
-app.get('/', function (req, res) {
-    res.sendFile('index.html');
+// ================
+app.get('/home', function (req, res) {
+    res.cookie('home', 'true');
+    return res.redirect('/');
+});
+
+function requireLogin(req, res, next) {
+    if (req.cookies.userid) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+app.all("/u/*", requireLogin, function (req, res, next) {
+    next();
 });
 
 app.get('/u', function (req, res) {
-    res.sendFile('src/html/main.html', { root: __dirname });
+    if (req.cookies.userid)
+        return res.sendFile('src/html/main.html', { root: __dirname });
+    return res.redirect('/');
 });
 
 var signin = false
 app.get('/signin', function (req, res) {
     signin = true;
-    res.sendFile('src/html/signinup.html', { root: __dirname })
+    res.sendFile('src/html/signinup.html', { root: __dirname });
 });
 
 app.get('/signup', function (req, res) {
@@ -83,6 +99,11 @@ app.get('/signup', function (req, res) {
 
 app.get('/signmode', function (req, res) {
     res.send(JSON.stringify({ signin: signin }))
+});
+
+app.get('/logout', function (req, res) {
+    res.clearCookie('userid');
+    res.send(JSON.stringify({ success: true }))
 });
 
 app.get('/u/dashboard', function (req, res) {
@@ -95,13 +116,15 @@ app.get('/u/dashboard', function (req, res) {
         if (err)
             console.log(err);
         console.log(result);
+        if (result[1].length == 0)
+            return res.render('dashboard.ejs', { categories: result[0], folPeoples: result[1], posts: [], profile: {}, likedPost: [] });
+        var userid = [];
+        for (var i = 0; i < result[1].length; i++)
+            userid.push(result[1][i].user_id);
 
         sql1 = "select * from post where created_by in (?) order by date desc;";
         sql2 = "select avatar,user_id from profile where user_id in (?)";
 
-        var userid = [];
-        for (var i = 0; i < result[1].length; i++)
-            userid.push(result[1][i].user_id)
         values = [userid, userid];
         console.log(sql1, values[0], sql2, values[1]);
         conn.query(sql1 + sql2, values, function (err, result2) {
@@ -124,10 +147,8 @@ app.get('/u/dashboard', function (req, res) {
     });
 });
 
-app.get('/u/like/:post_id/:likes', function (req, res) {
-    console.log(req.params.post_id, req.params.likes);
-    var likes = parseInt(req.params.likes) + 1;
-    var sql1 = "update post set likes = " + likes + " where post_id = " + req.params.post_id + ";";
+app.get('/u/like/:post_id', function (req, res) {
+    var sql1 = "update post set likes = likes + 1 where post_id = " + req.params.post_id + ";";
     var sql2 = "insert into likes values(" + req.params.post_id + "," + req.cookies.userid + ")";
     console.log(sql1, sql2);
     conn.query(sql1 + sql2, function (err, result) {
@@ -138,11 +159,8 @@ app.get('/u/like/:post_id/:likes', function (req, res) {
     })
 });
 
-
-app.get('/u/unlike/:post_id/:likes', function (req, res) {
-    console.log(req.params.post_id, req.params.likes);
-    var likes = parseInt(req.params.likes) - 1;
-    var sql1 = "update post set likes = " + likes + " where post_id = " + req.params.post_id + ";";
+app.get('/u/unlike/:post_id', function (req, res) {
+    var sql1 = "update post set likes = likes + 1 where post_id = " + req.params.post_id + ";";
     var sql2 = "delete from likes where post_id = " + req.params.post_id + " and user_id = " + req.cookies.userid;
     console.log(sql1, sql2);
     conn.query(sql1 + sql2, function (err, result) {
@@ -154,7 +172,6 @@ app.get('/u/unlike/:post_id/:likes', function (req, res) {
 });
 
 app.get('/comments/:post_id', function (req, res) {
-    console.log(req.params.post_id);
     var sql = " select username,comment_text,date from profile join comments on profile.user_id = comments.commented_by where post_id = " + req.params.post_id;
     conn.query(sql, function (err, result) {
         if (err)
@@ -165,9 +182,14 @@ app.get('/comments/:post_id', function (req, res) {
 });
 
 app.get('/u/addpost', function (req, res) {
-    return res.render('post', { categories: categories });
+    var sql = "select * from profile where user_id =" + req.cookies.userid;
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        return res.render('post.ejs', { categories: categories, profile: result[0] });
+    });
 });
-
 
 app.get('/u/explore', function (req, res) {
     res.render('explore.ejs', { categories: categories });
@@ -175,8 +197,10 @@ app.get('/u/explore', function (req, res) {
 
 app.get('/getcookie/:cookie', function (req, res) {
     var cookie = req.params.cookie;
-    console.log(req.cookies[cookie])
-    res.send(JSON.stringify({ cookie: req.cookies[cookie] }))
+    var value = req.cookies[cookie];
+    if (cookie == 'home')
+        res.clearCookie('home');
+    return res.send(JSON.stringify({ cookie: value }))
 });
 
 app.get('/get/username/:userid', function (req, res) {
@@ -191,15 +215,13 @@ app.get('/get/username/:userid', function (req, res) {
 });
 
 app.get('/uploads/:file', function (req, res) {
-    console.log(req.params);
     res.sendFile(__dirname + '/uploads/' + req.params.file);
 });
 
-app.get('/share/:postId/:userId/:noShares', function (req, res) {
+app.get('/share/:postId/:userId', function (req, res) {
     var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    var noShares = parseInt(req.params.noShares);
     var sql1 = "insert into shared values ?;";
-    var sql2 = "update post set no_shares =" + noShares + " where created_by = " + req.params.userId;
+    var sql2 = "update post set no_shares = no_shares + 1 where created_by = " + req.params.userId;
     var values = [[date, req.params.postId, req.params.userId]];
     conn.query(sql1 + sql2, [values], function (err, result) {
         if (err) {
@@ -212,11 +234,14 @@ app.get('/share/:postId/:userId/:noShares', function (req, res) {
     });
 });
 
+app.get('/u/messenger', function (req, res) {
+    return res.render('messenger.ejs');
+});
+
 // post requests 
 // ==============
 
 app.post('/auth', function (req, res) {
-    console.log(req.body);
     var sql = "select * from user where (username = ? or email = ?) and password = ?";
     var values = [mysql.escape(req.body.user), mysql.escape(req.body.user), mysql.escape(req.body.pass)];
     conn.query(sql, values, function (err, result) {
@@ -233,7 +258,6 @@ app.post('/auth', function (req, res) {
 });
 
 app.post('/create_user', function (req, res) {
-    console.log(req.body);
     var sql = "Insert into user (email,username,password) values ?";
     var values = [[mysql.escape(req.body.email), mysql.escape(req.body.username), mysql.escape(req.body.password)]];
     conn.query(sql, [values], function (err, result) {
@@ -244,13 +268,19 @@ app.post('/create_user', function (req, res) {
                 return res.send(JSON.stringify({ message: "failed", errno: 1062, sqlMessage: err.sqlMessage }));
         }
         res.cookie('userid', result.insertId);
-        console.log("inserted user :", req.body.username);
-        return res.send(JSON.stringify({ message: "success" }));
+        sql = "Insert into profile(user_id, username) values ?";
+        values = [[result.insertId, mysql.escape(req.body.username)]];
+        conn.query(sql, [values], function (err, result) {
+            if (err)
+                console.log(err);
+            console.log("inserted user :", req.body.username);
+            return res.send(JSON.stringify({ message: "success" }));
+
+        })
     });
 });
 
 app.post('/uploadfile', upload.array("files", 10), function (req, res) {
-    console.log("uploading files.");
     let result = [];
 
     for (let i = 0; i < req.files.length; i++) {
@@ -281,18 +311,23 @@ app.post('/submitpost', function (req, res) {
                 console.log(err);
         });
     });
+    sql = 'alter table profile update no_posts = no_posts+1 where user_id = ' + req.cookies.userid;
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err)
+    });
     return res.send(JSON.stringify({ message: "success" }));
 });
 
 app.post('/addcomment', function (req, res) {
     var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
     var sql1 = "insert into comments values ?;";
-    var sql2 = "update post set no_comments = " + req.body.noComments + " where post_id = " + req.body.postId;
+    var sql2 = "update post set no_comments = no_comments+1 where post_id = " + req.body.postId;
     var values = [[mysql.escape(req.body.commentText), req.body.postId, req.body.userid, date]]
     conn.query(sql1 + sql2, [values], function (err, result) {
         if (err)
             console.log(err);
         console.log(result);
         return res.send(JSON.stringify({ success: true }));
-    })
+    });
 });

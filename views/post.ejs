@@ -6,87 +6,91 @@
 
 <body>
     <div id="addpost-layout" class="row">
-        <div class="col-1 d-none d-sm-block"></div>
-        <div class="col-4 sec-1 d-none d-md-block">
+        <div class="col-2 d-none d-sm-block">
+            
+
+        </div>
+        <div class="col-3 sec-1 d-none d-md-block">
+            
             <br>
-            <div class="row">
-                <div class="col"></div><span class="nav-item avatar ">
+            <div class="row justify-content-center text-center">
+                <span class="nav-item avatar ">
+                    <% if(profile.avatar == null){%>
+                    <i class="fas fa-user-circle fa-7x"></i>
+                    <%}else{%>
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                         alt="avatar image" height="120">
                 </span>
-                <div class="col"></div>
-            </div>
-            <div class="row justify-content-center font-weight-bold">
-                Name
+                <%}%>
+                </div>
+            <div class="row justify-content-center name mt-2 font-weight-bold">
+                <%=profile.username.slice(1,-1)%>
             </div>
             <div class="row justify-content-center">
-                Status Line
+                <%if(profile.status_line == null){%>
+                ...
+                <%}else{%>
+                <%=profile.status_line%>
+                <%}%>
             </div>
 
             <div class="row intro">
-                <i class="material-icons m-36">
-                    business_center</i>
+                <i class="material-icons m-36">business_center</i>
                 Profession
-                <span>Handicraft Artist</span>
+                <span><%=profile.profession%></span>
             </div>
 
             <div class="row intro">
-                <i class="material-icons m-36">
-                    place</i>
+                <i class="material-icons m-36">place</i>
                 From
-                <span>Bhopal, M.P. India</span>
+                <span><%=profile.city%></span>
             </div>
 
             <div class="row intro">
-                <i class="material-icons m-36">
-                    directions_run</i>
+                <i class="material-icons m-36">directions_run</i>
                 Followers
-                <span>920</span>
+                <span><%=profile.no_followers%></span>
             </div>
             <div class="row intro">
-                <i class="material-icons m-36">
-                    post_add</i>
+                <i class="material-icons m-36">post_add</i>
                 Posts
-                <span>102</span>
+                <span><%=profile.no_posts%></span>
             </div>
             <div class="row intro">
-                <i class="material-icons m-36">
-                    share</i>
+                <i class="material-icons m-36">share</i>
                 Shared
-                <span>32</span>
+                <span><%=profile.no_shared%></span>
             </div>
             <div class="row intro">
-                <i class="material-icons m-36">
-                    group</i>
+                <i class="material-icons m-36">group</i>
                 Peoples you Follow
-                <span>9</span>
+                <span><%=profile.no_following%></span>
             </div>
             <div class="row intro">
-                <i class="material-icons">
-                    table_rows</i>
+                <i class="material-icons">table_rows</i>
                 Categories you follow
-                <span>3</span>
+                <span><%=profile.no_category_follow%></span>
             </div>
         </div>
         <div class="col sec-2">
             <br>
             <div class="md-form green-textarea active-green-textarea-2">
                 <i class="fas fa-pencil-alt prefix"></i>
-                <textarea id="text" class="md-textarea form-control" rows="3"></textarea>
-                <label for="form17">Write here</label>
+                <textarea id="text" class="md-textarea form-control" rows="2"></textarea>
+                <label>Write here</label>
             </div>
             <div id="show-img"></div>
 
             <select id="category-select" class="ui fluid search dropdown text-capitalize" multiple="">
                 <option value="">Category</option>
                 <% for (var i=0; i<categories.length; i++){%>
-                <option  value="<%= categories[i].category_id %>"> <%= categories[i].name %></option>
+                <option value="<%= categories[i].category_id %>"> <%= categories[i].name %></option>
                 <%}%>
             </select>
 
             <div class="row">
                 <div id="image-btn" class="btn add-btn py-1 px-4 ml-0" onclick="inputOn()">
-                    <i class="material-icons">add_a_photo</i>
+                    <i class="material-icons mt-1">add_a_photo</i>
                     <input id="file-input" type="file" multiple style="display: none;" accept="image/*, video/*">
                 </div>
                 <div class="btn add-btn py-1 px-4 ml-0" onclick="submitPost()">
@@ -95,10 +99,9 @@
             </div>
 
         </div>
-        <div class="col-1 d-none d-sm-block"></div>
+        <div class="col-2 d-none d-sm-block"></div>
 
     </div>
     <script type="text/javascript" src="../js/post.js"></script>
 </body>
-
 </html>

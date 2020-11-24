@@ -24,3 +24,11 @@ function getContent(Url) {
     });
 }
 
+function logout() {
+    fetch('http://localhost:3000/logout')
+        .then((res) => res.json())
+        .then((data) => {    
+            if (data.success == true)
+                location.href = '/';
+        });
+}

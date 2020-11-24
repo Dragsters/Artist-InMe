@@ -34,9 +34,7 @@ fetch('http://localhost:3000/signmode')
         return response.json();
     })
     .then((data) => {
-        console.log(data);
         signInMode = data.signin;
-        console.log("sign mode", signInMode);
         if (signInMode === false)
             signup();
     });
@@ -54,9 +52,10 @@ $("#signin-form").submit(function (e) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             if (data.message === 'found')
                 location.href = '/u';
+            else
+                alert('Username or Password Incorrect');
         });
 });
 
@@ -79,10 +78,8 @@ $("#signup-form").submit(function (e) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             if (data.errno === 1062) {
                 var sqlMessage = data.sqlMessage;
-                console.log(typeof (sqlMessage));
                 if (sqlMessage.includes('username'))
                     alert('username already exist');
                 else alert('email already exist');
