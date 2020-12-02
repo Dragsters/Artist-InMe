@@ -20,40 +20,37 @@ function gotoAddPost() {
     document.getElementById('nav-addpost-btn').click();
 }
 
-function like(post_id) {
-    var likes = parseInt($('#no-likes').html());
-    var like_i = document.getElementById('like-i');
-    if (like_i.classList.contains("liked")) {
-        like_i.classList.remove("liked");
-        like_i.classList.add("unliked")
-        $('#like-i').replaceWith("<i id='like-i' class='material-icons md-24 unliked'>favorite_border</i>");
-
+function like(post_id, this_el) {
+    var likes = parseInt($(this_el).children().eq(1).html());
+    var icon = $(this_el).children().eq(0).children('i').html();
+    console.log(likes, icon);
+    console.log(typeof (icon), icon.length);
+    if (icon == 'favorite') {
         fetch('http://localhost:3000/u/unlike/' + post_id)
             .then((response) => response.json())
             .then((data) => {
-                if (data.success == true) { }
+                if (data.success == true) {
+                    likes = likes - 1;
+                    $(this_el).children().eq(1).html("" + likes);
+                    $(this_el).children().eq(0).children('i').html('favorite_border');
+                }
             });
-        likes = likes - 1;
-        document.getElementById('no-likes').innerHTML = ("" + likes);
     } else {
-        like_i.classList.remove("unliked");
-        like_i.classList.add("liked");
-        $('#like-i').replaceWith("<i id='like-i' class='material-icons md-24 liked'>favorite</i>");
         fetch('http://localhost:3000/u/like/' + post_id)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                if (data.success == true) { }
+                if (data.success == true) {
+                    likes = likes + 1;
+                    $(this_el).children().eq(1).html("" + likes);
+                    $(this_el).children().eq(0).children('i').html('favorite');
+                }
             });
-        likes = likes + 1
-        document.getElementById('no-likes').innerHTML = ("" + likes);
     }
-
 }
 
-
-function getCommentUi( username, commentText, date) {
+function getCommentUi(username, commentText, date) {
     var commentui = "<div class='comment pl-4 p-2'>"
         + "<div class = 'row'>"
         + "<div class='username'>"
@@ -65,7 +62,6 @@ function getCommentUi( username, commentText, date) {
 }
 
 var postcomments = [];
-$('#comment-form').hide();
 
 function comment(post_id, post_i) {
     var post = "#post-" + post_i + " .comment-list";
@@ -73,7 +69,7 @@ function comment(post_id, post_i) {
         if (post.postno == post_i)
             return true;
     });
-    $('#comment-form').toggle("fast", "linear");
+    $(post + ' #comment-form').toggle("fast", "linear");
     if (!found)
         fetch('http://localhost:3000/comments/' + post_id)
             .then((response) => response.json())
@@ -81,11 +77,13 @@ function comment(post_id, post_i) {
                 postcomments.push({ postno: post_i, comments: data });
                 console.log(postcomments);
                 console.log(data);
-                var comment = getCommentUi( data[0].username.slice(1, -1), data[0].comment_text.slice(1, -1), data[0].date);
-                $(post).append(comment);
-                if (data.length > 1) {
+                if (data.length >= 1) {
+                    var comment = getCommentUi(data[0].username.slice(1, -1), data[0].comment_text.slice(1, -1), data[0].date);
+                    $(post).append(comment);
+                }
+                if (data.length >= 1) {
                     for (var i = 1; i < 3 && i < data.length; i++) {
-                        comment = getCommentUi( data[i].username.slice(1, -1), data[i].comment_text.slice(1, -1), data[i].date);
+                        comment = getCommentUi(data[i].username.slice(1, -1), data[i].comment_text.slice(1, -1), data[i].date);
                         $(post).append(comment);
                     }
                     $(post).append("<div class='more-cmnt-btn ml-4 m-3 mr-5' onclick='moreComments(" + post_i + "," + 6 + ")'>show more</div>");
@@ -135,14 +133,13 @@ function submitComment(post_id, post_i) {
         });
 }
 
-function share(post_id) {
-    var no_shares = parseInt($('#no-shares').html()) + 1;
+function share(post_id, this_el) {
+    var no_shares = parseInt($(this_el).children('#no-shares').html()) + 1;
     fetch('http://localhost:3000/share/' + post_id + '/' + userid)
         .then((response) => response.json())
         .then((data) => {
             if (data.success == true) {
-
-                document.getElementById('no-shares').innerHTML = ("" + no_shares);
+                $(this_el).children('#no-shares').html("" + no_shares);
             }
             alert(data.message);
         });

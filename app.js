@@ -156,11 +156,11 @@ app.get('/u/like/:post_id', function (req, res) {
             console.log(err);
         console.log(result);
         return res.send(JSON.stringify({ "success": true }));
-    })
+    });
 });
 
 app.get('/u/unlike/:post_id', function (req, res) {
-    var sql1 = "update post set likes = likes + 1 where post_id = " + req.params.post_id + ";";
+    var sql1 = "update post set likes = likes - 1 where post_id = " + req.params.post_id + ";";
     var sql2 = "delete from likes where post_id = " + req.params.post_id + " and user_id = " + req.cookies.userid;
     console.log(sql1, sql2);
     conn.query(sql1 + sql2, function (err, result) {
@@ -172,7 +172,8 @@ app.get('/u/unlike/:post_id', function (req, res) {
 });
 
 app.get('/comments/:post_id', function (req, res) {
-    var sql = " select username,comment_text,date from profile join comments on profile.user_id = comments.commented_by where post_id = " + req.params.post_id;
+    var sql = "select username,comment_text,date from profile join comments on profile.user_id = comments.commented_by where post_id = " + req.params.post_id;
+    console.log(sql);
     conn.query(sql, function (err, result) {
         if (err)
             console.log(err);
@@ -234,8 +235,58 @@ app.get('/share/:postId/:userId', function (req, res) {
     });
 });
 
+function getdateMonth(time) {
+    var date = new Date(time).toDateString().slice(0, 10);
+    return date;
+}
+
 app.get('/u/messenger', function (req, res) {
-    return res.render('messenger.ejs');
+    var sql = "select msg_text,time,sender_id,reciever_id from messages where sender_id = " + req.cookies.userid + " or reciever_id = " + req.cookies.userid + " order by time desc";
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log("result1", result);
+        var userlist = [];
+        var contacts = [];
+        for (var i = 0; i < result.length; i++) {
+            if (!userlist.includes(result[i].sender_id)) {
+                if (result[i].sender_id != req.cookies.userid) {
+                    userlist.push(result[i].sender_id);
+                    var res2 = { ...result[i] };
+                    res2.time = getdateMonth(res2.time);
+                    contacts.push(res2);
+                }
+            }
+            if (!userlist.includes(result[i].reciever_id)) {
+                if (result[i].reciever_id != req.cookies.userid) {
+                    userlist.push(result[i].reciever_id);
+                    var res2 = { ...result[i] };
+                    res2.time = getdateMonth(res2.time);
+                    contacts.push(res2);
+                }
+            }
+        }
+        console.log("contacts", contacts);
+        var sql = "select avatar,username,user_id from profile where user_id in ?";
+        values = [userlist];
+        conn.query(sql, [values], function (err, result2) {
+            if (err)
+                console.log(err);
+            console.log("result2", result2);
+
+            var id1 = contacts[contacts.length - 1].sender_id;
+            var id2 = contacts[contacts.length - 1].reciever_id;
+            var msglist = [];
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].sender_id == id1 && result[i].reciever_id == id2)
+                    msglist.push(result[i]);
+                else if (result[i].reciever_id == id1 && result[i].sender_id == id2)
+                    msglist.push(result[i]);
+            }
+            return res.render('messenger.ejs', { contacts: contacts, msg_list: msglist.reverse(), profile: result2, userid: req.cookies.userid });
+        });
+
+    });
 });
 
 // post requests 

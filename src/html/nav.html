@@ -24,7 +24,9 @@
                             class="rounded-circle z-depth-0" alt="avatar image" height="35">
                     </div>
                     <div class="dropdown-menu">
-                        <div class="dropdown-item" onclick="getContent('profile')">View Profile</div>
+                        <div class="dropdown-item" onclick="gotoProfile()">View Profile</div>
+                        <div class="dropdown-item">Edit Profile</div>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Privacy Policy</a>
                         <a class="dropdown-item" href="#">Terms of Service</a>
                         <div class="dropdown-divider"></div>
@@ -86,7 +88,7 @@
                 <span>
                     <i class="material-icons md-36">account_box</i>
                 </span>
-                <span>
+                <span id="nav-profile-btn">
                     Profile
                 </span>
             </div>

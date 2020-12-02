@@ -142,15 +142,15 @@
                             </div>
 
                             <div class="row activity-row">
-                                <div class="col" onclick="like(<%= posts[i].post_id %>)">
+                                <div class="col" onclick="like(<%= posts[i].post_id %>,this)">
                                     <div class="row justify-content-center">
                                         <%if(likedPost.find(function(liked, index) {
                                         if(liked.post_id == posts[i].post_id)
                                                 return true;
                                     })){%>
-                                        <i id="like-i" class="material-icons md-24 unliked">favorite_border</i>
+                                        <i id="like-i" class="material-icons md-24">favorite</i>
                                         <%}else{%>
-                                        <i id="like-i" class="material-icons md-24 liked">favorite</i>
+                                        <i id="like-i" class="material-icons md-24">favorite_border</i>
                                         <%}%>
                                 </div>
 
@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col" onclick="share(<%= posts[i].post_id%>)">
+                                <div class="col" onclick="share(<%= posts[i].post_id%>,this)">
                                     <div class="row justify-content-center">
                                         <i class="material-icons md-24">share</i>
                                     </div>

@@ -24,6 +24,10 @@ function getContent(Url) {
     });
 }
 
+function gotoProfile(){
+    document.getElementById('nav-profile-btn').click();
+}
+
 function logout() {
     fetch('http://localhost:3000/logout')
         .then((res) => res.json())
