@@ -354,19 +354,45 @@ body,html{
 .dropdown-toggle{
     cursor: pointer;
 }
+
 .dropdown-item:hover{
     background:#2A3747;
     color: white;
 }
+
 .dropdown-item{
     color: white;
 }
+
 .dropdown-menu{
     background-color: #181D27;
 }
+
 #content .dropdown-menu .dropdown-item{
     font-size: large;
 }
+
+.suggest{
+    border-radius: 5px;
+    background-color: #181d27;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: 400px;
+    margin-top: 3px;
+    position: absolute;
+    width: 88%;
+    z-index: 50;
+}
+
+.suggest-item{
+    font-size: x-large;
+}
+
+.suggest-item:hover{
+    color: #43ffbb;
+    cursor:pointer;
+}
+
 /* loader related css */
 .loader {
     height: 80%;
@@ -733,6 +759,8 @@ font-size: x-large;
 
 #messenger-layout .sec-2 .msg-list{
     height: 60vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 #messenger-layout .sec-2 .msg-form{
     border-top: 1px solid #2A3747;
@@ -745,6 +773,7 @@ font-size: x-large;
     padding: 5px;
     font-size: larger;
     color: #212B3E;
+    max-width: 70%;
 }
 
 #messenger-layout .sec-2 .msg-list .his-message{
@@ -752,6 +781,7 @@ font-size: x-large;
     border-radius: 2px 2px 10px 2px;
     width: max-content;
     padding: 5px;
+    max-width: 70%;
     font-size: larger;
 }
 
@@ -764,4 +794,19 @@ font-size: x-large;
     margin-top: -10px;
     color: grey;
     width: max-content;
+}
+
+#messenger-layout .sec-2 .msg-submit-btn{
+    cursor: pointer;
+}
+
+#messenger-layout .search-list{
+    position: absolute;
+    visibility: visible;
+    background: gray;
+    height: 200px;
+    z-index: 30;
+    border: red;
+    width: 88%;
+    margin-right: 1%;
 }

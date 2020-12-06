@@ -220,7 +220,8 @@ app.get('/uploads/:file', function (req, res) {
 });
 
 app.get('/share/:postId/:userId', function (req, res) {
-    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var date2 = new Date()
+    var date = date2.toISOString().slice(0, 10) + " " + date2.toString().slice(16, 24);
     var sql1 = "insert into shared values ?;";
     var sql2 = "update post set no_shares = no_shares + 1 where created_by = " + req.params.userId;
     var values = [[date, req.params.postId, req.params.userId]];
@@ -241,11 +242,10 @@ function getdateMonth(time) {
 }
 
 app.get('/u/messenger', function (req, res) {
-    var sql = "select msg_text,time,sender_id,reciever_id from messages where sender_id = " + req.cookies.userid + " or reciever_id = " + req.cookies.userid + " order by time desc";
+    var sql = "select * from messages where sender_id = " + req.cookies.userid + " or reciever_id = " + req.cookies.userid + " order by time desc";
     conn.query(sql, function (err, result) {
         if (err)
             console.log(err);
-        console.log("result1", result);
         var userlist = [];
         var contacts = [];
         for (var i = 0; i < result.length; i++) {
@@ -266,16 +266,15 @@ app.get('/u/messenger', function (req, res) {
                 }
             }
         }
-        console.log("contacts", contacts);
+        if (contacts.length < 1)
+            return res.render('messenger.ejs', { contacts: contacts, msg_list: [], profile: [], userid: req.cookies.userid });
         var sql = "select avatar,username,user_id from profile where user_id in ?";
         values = [userlist];
         conn.query(sql, [values], function (err, result2) {
             if (err)
-                console.log(err);
-            console.log("result2", result2);
-
-            var id1 = contacts[contacts.length - 1].sender_id;
-            var id2 = contacts[contacts.length - 1].reciever_id;
+                console.log(err);            
+            var id1 = contacts[0].sender_id;
+            var id2 = contacts[0].reciever_id;
             var msglist = [];
             for (var i = 0; i < result.length; i++) {
                 if (result[i].sender_id == id1 && result[i].reciever_id == id2)
@@ -286,6 +285,42 @@ app.get('/u/messenger', function (req, res) {
             return res.render('messenger.ejs', { contacts: contacts, msg_list: msglist.reverse(), profile: result2, userid: req.cookies.userid });
         });
 
+    });
+});
+
+app.get('/refreshmessages/:to_userid', function (req, res) {
+    if (req.params.to_userid == undefined)
+        return res.send(JSON.stringify({ msglist: [], message: "no messages" }));
+    var sql1 = "select * from messages where (sender_id = " + req.cookies.userid + " and reciever_id = " + req.params.to_userid + ") or (sender_id = " + req.params.to_userid + " and reciever_id = " + req.cookies.userid + ") order by time desc";
+    conn.query(sql1, function (err, result) {
+        if (err)
+            console.log(err);
+        return res.send(JSON.stringify({ msglist: result }));
+    });
+});
+app.get('/getmessages/:to_userid', function (req, res) {
+    if (req.params.to_userid == undefined)
+        return res.render('part_msglist.ejs',{msg_list: [],firstuser:{},userid:req.cookies.userid});
+    var sql1 = "select * from messages where (sender_id = " + req.cookies.userid + " and reciever_id = " + req.params.to_userid + ") or (sender_id = " + req.params.to_userid + " and reciever_id = " + req.cookies.userid + ") order by time;";
+    var sql2 = "select username, avatar,user_id from profile where user_id = " + req.params.to_userid;
+    conn.query(sql1 + sql2, function (err, result) {
+        if (err)
+            console.log(err);
+        return res.render('part_msglist.ejs', { msg_list: result[0], firstuser: result[1][0], userid: req.cookies.userid });
+    });
+});
+
+
+app.get('/search/:uname', function (req, res) {
+    var sql = "select avatar,username,user_id from profile where upper(username) like upper('%" + req.params.uname + "%')";
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        for (i = 0; i < result.length; i++)
+            if (result[i].user_id == req.cookies.userid)
+                result.splice(i, 1);
+        return res.send(JSON.stringify({ userlist: result }));
     });
 });
 
@@ -342,7 +377,8 @@ app.post('/uploadfile', upload.array("files", 10), function (req, res) {
 });
 
 app.post('/submitpost', function (req, res) {
-    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var date2 = new Date();
+    var date = date2.toISOString().slice(0, 10) + " " + date2.toString().slice(16, 24);
     var sql = "insert into post (likes,no_comments,no_shares,date,text,uploads,created_by) values ?";
     if (req.cookies.userid == undefined)
         req.cookies.userid = 1;
@@ -371,7 +407,8 @@ app.post('/submitpost', function (req, res) {
 });
 
 app.post('/addcomment', function (req, res) {
-    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var date2 = new Date();
+    var date = date2.toISOString().slice(0, 10) + " " + date2.toString().slice(16, 24);
     var sql1 = "insert into comments values ?;";
     var sql2 = "update post set no_comments = no_comments+1 where post_id = " + req.body.postId;
     var values = [[mysql.escape(req.body.commentText), req.body.postId, req.body.userid, date]]
@@ -381,4 +418,18 @@ app.post('/addcomment', function (req, res) {
         console.log(result);
         return res.send(JSON.stringify({ success: true }));
     });
+});
+
+app.post('/sendmessage', function (req, res) {
+    console.log(req.body);
+    var date2 = new Date();
+    var time = date2.toISOString().slice(0, 10) + " " + date2.toString().slice(16, 24);
+    var sql = "insert into messages values ?";
+    var values = [[mysql.escape(req.body.msgText), time, req.cookies.userid, req.body.to]];
+    conn.query(sql, [values], function (err, res) {
+        if (err)
+            console.log(err);
+        console.log(res);
+    });
+    res.send(JSON.stringify({ success: true }));
 });
