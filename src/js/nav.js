@@ -19,19 +19,23 @@ function activateClass(e) {
 
 function getContent(Url) {
     $('#content').load('loader.html');
+    if (Url == 'shop') {
+        $('#content').load('shop.html');
+        return;
+    }
     $.get('/u/' + Url, function (html) {
         $('#content').html(html);
     });
 }
 
-function gotoProfile(){
+function gotoProfile() {
     document.getElementById('nav-profile-btn').click();
 }
 
 function logout() {
     fetch('http://localhost:3000/logout')
         .then((res) => res.json())
-        .then((data) => {    
+        .then((data) => {
             if (data.success == true)
                 location.href = '/';
         });

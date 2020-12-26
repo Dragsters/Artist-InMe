@@ -25,34 +25,25 @@
 
             <div class="people-list">
                 <% var firstuser = undefined;
-                for(var i=0; i < contacts.length; i++){
-                        var avatar = undefined;
-                        var username = undefined;
-                        var id = undefined;
-                        if(contacts[i].sender_id != userid){
-                            for(var j=0; j < profile.length; j++){
-                                if(profile[j].user_id == contacts[i].sender_id){
-                                    avatar = profile[j].avatar;
-                                    username = profile[j].username.slice(1,-1);
-                                    id = profile[j].user_id;
-                                    if(firstuser == undefined)
-                                        firstuser = profile[j];
-                                    break;  
-                                }
-                            }
-                        }else{
-                            for(var j=0; j < profile.length; j++){
-                                if(profile[j].user_id == contacts[i].reciever_id){
-                                    avatar = profile[j].avatar;
-                                    username = profile[j].username.slice(1,-1);
-                                    id=profile[j].user_id;
-                                    if(firstuser == undefined)
-                                        firstuser = profile[j];
-                                    break;  
-                                }
-                            }
-                        }
-                        %>
+                
+                for(var i=0; i< contacts.length; i++){
+                    var avatar = undefined;
+                    var username = undefined;
+                    var id = undefined;
+                    if(contacts[i].sender_id != userid){
+                        avatar = contacts[i].sender_avatar;
+                        username = contacts[i].sender_name.slice(1,-1);
+                        id = contacts[i].sender_id;
+                        if(firstuser == undefined)
+                            firstuser ={username: contacts[i].sender_name, user_id: contacts[i].sender_id};       
+                    }else{
+                        avatar = contacts[i].reciever_avatar;
+                        username = contacts[i].receiver_name.slice(1,-1);
+                        id = contacts[i].reciever_id;
+                        if(firstuser == undefined)
+                            firstuser ={username: contacts[i].reciever_name, user_id: contacts[i].reciever_id};
+                    }
+                %>
                 <div class="row" onclick="gotoUserMessages(<%= id %>)">
                     <div class="col-1 pl-0">
                         <% if(avatar == null){%>

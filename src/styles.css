@@ -475,7 +475,6 @@ body,html{
 #dash-layout .sec-11 .category-text,
 #dash-layout .sec-12 .people-text,
 #dash-layout .sec-31 .notif-text,
-#dash-layout .sec-32 .people-text,
 #explore-layout .sec-1 .category-text{
     display: block;
     margin: 5px;
@@ -484,8 +483,11 @@ body,html{
     font-size: x-large;
 }
 
-#dash-layout .sec-31 .notif-text,
-#dash-layout .sec-32 .people-text{
+#dash-layout .sec-32 .name{
+    cursor: pointer;
+    font-size: x-large;
+}
+#dash-layout .sec-31 .notif-text{
     border-bottom: 1px solid #2A3747;
     font-size: x-large;
 }
@@ -496,21 +498,24 @@ body,html{
 
 #dash-layout .sec-11 .category-text:hover,
 #dash-layout .sec-12 .people-text:hover,
-#dash-layout .sec-32 .people-text:hover,
-#explore-layout .sec-1 .category-text:hover
-{
+#dash-layout .sec-32 .name:hover,
+#explore-layout .sec-1 .category-text:hover{
     font-weight: bold;
+    color: #43ffbb;
 }
 
 #dash-layout .sec-11 .category-items,
 #dash-layout .sec-12 .people-items,
 #dash-layout .sec-31 .notif-items,
-#dash-layout .sec-32 .message-items
-{
+#dash-layout .sec-32 .message-items{
     overflow-y: scroll;
     scrollbar-width: none;
     height: 29vh;
     margin-top: 10px;
+}
+
+#dash-layout .sec-32 .msg-item{
+    border-bottom: 1px solid #2A3747;
 }
 
 #dash-layout .post-list{
@@ -519,6 +524,9 @@ body,html{
     height: 71vh;
 }
 
+#dash-layout .sec-2 .post .people-text{
+    border-bottom:1px solid #2A3747;
+}
 #dash-layout .sec-2 .post .people-text .avatar>.fas{
     color: #43ffbb;
 }
@@ -595,6 +603,25 @@ body,html{
     height: 42vh;
 }
 
+#dash-layout #follow-card{
+    margin: 10px;
+    border-radius: 20px;
+}
+
+
+#dash-layout .unfollow-btn{
+    background: #212B3E;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+#dash-layout .follow-btn{
+    background: #43ffbb;
+    border-radius: 18px;
+    cursor: pointer;
+    color: #15191C;
+}
+
 /* add post section related css */
 #addpost-layout .sec-1,
 #addpost-layout .sec-2
@@ -609,22 +636,26 @@ body,html{
     padding-bottom: 10px;
 }
 
-#addpost-layout .sec-1 .intro{
+#addpost-layout .sec-1 .intro,
+#profile-layout .sec-1 .intro{
     padding: 2px;
     font-size: x-large;
 }
 
-#addpost-layout .sec-1 .intro i{
+#addpost-layout .sec-1 .intro i,
+#profile-layout .sec-1 .intro i{
     margin-right: 5px;
 }
 
-#addpost-layout .sec-1 .intro span{
+#addpost-layout .sec-1 .intro span,
+#profile-layout .sec-1 .intro span{
     font-weight: bold;
     margin-left: 5px;
 }
 
 #addpost-layout .sec-1 .name,
 #addpost-layout .sec-2 label
+
 {
     font-size: xx-large;
 }
@@ -638,7 +669,8 @@ body,html{
 font-size: x-large;
 }
 
-#addpost-layout .sec-1 i{
+#addpost-layout .sec-1 i,
+#profile-layout .sec-1 i{
     color: #43ffbb;
 }
 
@@ -809,4 +841,38 @@ font-size: x-large;
     border: red;
     width: 88%;
     margin-right: 1%;
+}
+
+/* profile related css */
+#profile-layout .sec-1 .name{
+    color: #43ffbb;
+}
+
+#profile-layout .edit-btn,
+#profile-layout .more-btn,
+#profile-layout .follow-btn,
+#profile-layout .unfollow-btn{
+    position: relative;
+    right: 0px;
+    background:#212B3E;
+    padding: 5px;
+    margin-bottom: 0px;
+    margin-top: auto;
+    border-radius: 8px;
+    font-size: large;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+#profile-layout .btn:hover{
+    color: white;
+}
+#profile-layout .unfollow-btn{
+    background:#43ffbb;
+    color: #0d131f !important;
+}
+
+#profile-layout .btn-row{
+    position: relative;
+    margin-left: auto;
 }

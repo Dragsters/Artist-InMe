@@ -145,7 +145,30 @@ function share(post_id, this_el) {
         });
 }
 
-function gotoCategory() { }
-function gotoUser() { }
-function gotoNotif() { }
+function gotoCategory(id, name) {
+    $.get('/posts/category/' + id, function (html) {
+        $('#content-postlist').html(html);
+        $('#follow-card').html('<span class="m-3 text-capitalize fa-2x" style="color:#43ffbb;">' + name + '</span>' +
+            "<span class='unfollow-btn p-3 ml-auto mr-0' onclick='catUnfollow(" + id + ',this' + ")'>unfollow</span>");
+    });
+}
+
+function catUnfollow(id, this_el) {
+    $(this_el).replaceWith("<span class='follow-btn p-3 ml-auto mr-0' onclick='catfollow(" + id + ',this' + ")'>follow</span>");
+    // unfollow
+}
+
+function catfollow(id, this_el) {
+    $(this_el).replaceWith("<span class='unfollow-btn p-3 ml-auto mr-0' onclick='catUnfollow(" + id + ',this' + ")'>unfollow</span>");
+    // follow
+}
+
+function gotoUser(id) {    
+    document.getElementById('nav-profile-btn').click();
+    $.get('/u/profile/'+id, function (html) {
+        $('#content').html(html);
+    });
+}
+
+// function gotoNotif() { }
 function gotoMessage() { }

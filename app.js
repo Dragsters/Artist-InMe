@@ -86,6 +86,10 @@ app.get('/u', function (req, res) {
     return res.redirect('/');
 });
 
+app.get('/aboutus', function (req, res) {
+    res.sendFile('src/html/aboutus.html', { root: __dirname });
+})
+
 var signin = false
 app.get('/signin', function (req, res) {
     signin = true;
@@ -107,41 +111,42 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/u/dashboard', function (req, res) {
-    if (req.cookies.userid == undefined)
-        req.cookies.userid = 1;
     var sql1 = "select fc.category_id, name from follow_category fc join categories c on fc.category_id = c.category_id where fc.user_id = " + req.cookies.userid + ";"
     var sql2 = "select user_id, username from follow_people join user on follows_user_id = user_id where this_user_id = " + req.cookies.userid;
-    console.log(sql1, "\n", sql2);
+    // console.log(sql1, "\n", sql2);
     conn.query(sql1 + sql2, function (err, result) {
         if (err)
             console.log(err);
-        console.log(result);
+        // console.log(result);
         if (result[1].length == 0)
             return res.render('dashboard.ejs', { categories: result[0], folPeoples: result[1], posts: [], profile: {}, likedPost: [] });
         var userid = [];
         for (var i = 0; i < result[1].length; i++)
             userid.push(result[1][i].user_id);
 
-        sql1 = "select * from post where created_by in (?) order by date desc;";
-        sql2 = "select avatar,user_id from profile where user_id in (?)";
-
-        values = [userid, userid];
-        console.log(sql1, values[0], sql2, values[1]);
-        conn.query(sql1 + sql2, values, function (err, result2) {
+        sql1 = "select post.*,profile.username, profile.avatar from post, profile where created_by in (?) and post.created_by = profile.user_id  order by date desc;";
+        values = [userid];
+        // console.log(sql1, values[0], sql2, values[1]);
+        conn.query(sql1, [values], function (err, result2) {
             if (err)
                 console.log(err);
-            console.log(result2);
+            // console.log(result2);
             var post_ids = [];
-            for (var i = 0; i < result2[0].length; i++)
-                post_ids.push(result2[0][i].post_id);
+            for (var i = 0; i < result2.length; i++)
+                post_ids.push(result2[i].post_id);
 
             sql1 = "select * from likes where user_id = " + req.cookies.userid + " and post_id in (" + post_ids + ")";
-            console.log(sql1);
+            // console.log(sql1);
             conn.query(sql1, function (err, result3) {
                 if (err)
                     console.log(err);
                 console.log("result3", result3);
-                return res.render('dashboard.ejs', { categories: result[0], folPeoples: result[1], posts: result2[0], profile: result2[1], likedPost: result3 });
+                var message = {};
+                getmessages(req, res)
+                    .then((msgobj) => {
+                        // console.log(msgobj);
+                        return res.render('dashboard.ejs', { categories: result[0], folPeoples: result[1], posts: result2, likedPost: result3, contacts: msgobj.contacts,userid: req.cookies.userid });
+                    });
             });
         });
     });
@@ -206,11 +211,11 @@ app.get('/getcookie/:cookie', function (req, res) {
 
 app.get('/get/username/:userid', function (req, res) {
     var sql = "select username from user where user_id = " + req.params.userid;
-    console.log(sql);
+    // console.log(sql);
     conn.query(sql, function (err, result) {
         if (err)
             console.log(err);
-        console.log(result);
+        // console.log(result);
         return res.send(JSON.stringify({ username: result[0].username }));
     });
 });
@@ -241,51 +246,44 @@ function getdateMonth(time) {
     return date;
 }
 
-app.get('/u/messenger', function (req, res) {
-    var sql = "select * from messages where sender_id = " + req.cookies.userid + " or reciever_id = " + req.cookies.userid + " order by time desc";
-    conn.query(sql, function (err, result) {
-        if (err)
-            console.log(err);
-        var userlist = [];
-        var contacts = [];
-        for (var i = 0; i < result.length; i++) {
-            if (!userlist.includes(result[i].sender_id)) {
-                if (result[i].sender_id != req.cookies.userid) {
-                    userlist.push(result[i].sender_id);
-                    var res2 = { ...result[i] };
-                    res2.time = getdateMonth(res2.time);
-                    contacts.push(res2);
-                }
-            }
-            if (!userlist.includes(result[i].reciever_id)) {
-                if (result[i].reciever_id != req.cookies.userid) {
-                    userlist.push(result[i].reciever_id);
-                    var res2 = { ...result[i] };
-                    res2.time = getdateMonth(res2.time);
-                    contacts.push(res2);
-                }
-            }
-        }
-        if (contacts.length < 1)
-            return res.render('messenger.ejs', { contacts: contacts, msg_list: [], profile: [], userid: req.cookies.userid });
-        var sql = "select avatar,username,user_id from profile where user_id in ?";
-        values = [userlist];
-        conn.query(sql, [values], function (err, result2) {
+function getmessages(req, res) {
+    return new Promise(function (resolve, reject) {
+        var sql = "select messages.*,p1.username as sender_name,p1.avatar as sender_avatar, p2.username as receiver_name,p2.avatar as receiver_avatar from messages,profile p1, profile p2 where (sender_id = " + req.cookies.userid + " or reciever_id = " + req.cookies.userid + ") and sender_id = p1.user_id  and reciever_id = p2.user_id order by time desc";
+        conn.query(sql, function (err, result) {
             if (err)
-                console.log(err);            
-            var id1 = contacts[0].sender_id;
-            var id2 = contacts[0].reciever_id;
-            var msglist = [];
+                console.log(err);
+            // console.log("messages query ",result);
+            var userlist = [];
+            var contacts = [];
             for (var i = 0; i < result.length; i++) {
-                if (result[i].sender_id == id1 && result[i].reciever_id == id2)
-                    msglist.push(result[i]);
-                else if (result[i].reciever_id == id1 && result[i].sender_id == id2)
-                    msglist.push(result[i]);
+                if (result[i].sender_id != req.cookies.userid) {
+                    if (!userlist.includes(result[i].sender_id)) {
+                        userlist.push(result[i].sender_id);
+                        var res2 = { ...result[i] };
+                        res2.time = getdateMonth(res2.time);
+                        contacts.push(res2);
+                    }
+                }
+                if (result[i].reciever_id != req.cookies.userid) {
+                    if (!userlist.includes(result[i].reciever_id)) {
+                        userlist.push(result[i].reciever_id);
+                        var res2 = { ...result[i] };
+                        res2.time = getdateMonth(res2.time);
+                        contacts.push(res2);
+                    }
+                }
             }
-            return res.render('messenger.ejs', { contacts: contacts, msg_list: msglist.reverse(), profile: result2, userid: req.cookies.userid });
+            // console.log("contacts", contacts);
+            if (contacts.length < 1)
+                resolve({ contacts: contacts, msg_list: [], profile: [], userid: req.cookies.userid });
+            else resolve({ contacts: contacts, msg_list: result.reverse(), userid: req.cookies.userid });
         });
-
     });
+}
+
+app.get('/u/messenger', function (req, res) {
+    return getmessages(req, res)
+        .then((msgObj) => res.render('messenger.ejs', msgObj));
 });
 
 app.get('/refreshmessages/:to_userid', function (req, res) {
@@ -298,9 +296,10 @@ app.get('/refreshmessages/:to_userid', function (req, res) {
         return res.send(JSON.stringify({ msglist: result }));
     });
 });
+
 app.get('/getmessages/:to_userid', function (req, res) {
     if (req.params.to_userid == undefined)
-        return res.render('part_msglist.ejs',{msg_list: [],firstuser:{},userid:req.cookies.userid});
+        return res.render('part_msglist.ejs', { msg_list: [], firstuser: {}, userid: req.cookies.userid });
     var sql1 = "select * from messages where (sender_id = " + req.cookies.userid + " and reciever_id = " + req.params.to_userid + ") or (sender_id = " + req.params.to_userid + " and reciever_id = " + req.cookies.userid + ") order by time;";
     var sql2 = "select username, avatar,user_id from profile where user_id = " + req.params.to_userid;
     conn.query(sql1 + sql2, function (err, result) {
@@ -321,6 +320,46 @@ app.get('/search/:uname', function (req, res) {
             if (result[i].user_id == req.cookies.userid)
                 result.splice(i, 1);
         return res.send(JSON.stringify({ userlist: result }));
+    });
+});
+
+app.get('/u/profile', function (req, res) {
+    var sql = "select * from profile where user_id = " + req.cookies.userid;
+    conn.query(sql, function (err, result) {
+        if (err)
+            console.log(err);
+        console.log(result);
+        return res.render('profile.ejs', { profile: result[0], thisUser: true, follow: true });
+    });
+});
+
+app.get('/u/profile/:id', function (req, res) {
+    var sql1 = "select * from profile where user_id = " + req.params.id + ";";
+    var sql2 = "select follows_user_id from follow_people where this_user_id = " + req.cookies.userid + " and follows_user_id = " + req.params.id;
+    conn.query(sql1 + sql2, function (err, result) {
+        if (err)
+            console.log(err);
+        // console.log(result);
+        var follow = false;
+        if (result[1].length > 0)
+            follow = true;
+        return res.render('profile.ejs', { profile: result[0][0], thisUser: false, follow: follow });
+    });
+})
+
+app.get('/posts/category/:categoryId', function (req, res) {
+    var sql1 = "select * from post p, post_category pc, profile where p.post_id = pc.post_id and pc.category_id = " + req.params.categoryId + " and p.created_by = profile.user_Id";
+    conn.query(sql1, function (err, result) {
+        if (err)
+            console.log(err);
+        // console.log(result);
+        var postid = [];
+        for (var i = 0; i < result.length; i++)
+            postid.push(result[i].post_id);
+        var sql2 = "select * from likes where user_id = " + req.cookies.userid + " and post_id in (" + postid + ")";
+        conn.query(sql2, function (err, result2) {
+            return res.render('part_postlist.ejs', { posts: result, likedPost: result2 });
+        });
     });
 });
 
