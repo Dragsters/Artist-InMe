@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <div id="messenger-layout" class="row">
+        <div class="col-2 d-none d-sm-block"></div>
+        <div class="col-3 sec-1 d-none d-md-block">
+            <div>
+                <div class="search row p-2 pl-4">
+                    <input type="text" placeholder="Search" oninput="search(this)" onfocus="showHideSuggest()"
+                        onblur="showHideSuggest()">
+                    <i class="fas fa-search fa-md"></i>
+                </div>
+                <div class="suggest" style="display: none;">
+                    <div class="suggest-item p-2" onclick="">
+                        Not Found
+                    </div>
+                </div>
+            </div>
+
+            <div class="head">Messages</div>
+
+            <div class="people-list">
+                <% var firstuser = undefined;
+                
+                for(var i=0; i< contacts.length; i++){
+                    var avatar = undefined;
+                    var username = undefined;
+                    var id = undefined;
+                    if(contacts[i].sender_id != userid){
+                        avatar = contacts[i].sender_avatar;
+                        username = contacts[i].sender_name.slice(1,-1);
+                        id = contacts[i].sender_id;
+                        if(firstuser == undefined)
+                            firstuser ={username: contacts[i].sender_name, user_id: contacts[i].sender_id};       
+                    }else{
+                        avatar = contacts[i].reciever_avatar;
+                        username = contacts[i].receiver_name.slice(1,-1);
+                        id = contacts[i].reciever_id;
+                        if(firstuser == undefined)
+                            firstuser ={username: contacts[i].reciever_name, user_id: contacts[i].reciever_id};
+                    }
+                %>
+                <div class="row" onclick="gotoUserMessages(<%= id %>)">
+                    <div class="col-1 pl-0">
+                        <% if(avatar == null){%>
+                        <i class="fas fa-user-circle fa-2x mt-3"></i>
+                        <%}else{%>
+                            <img class="rounded-circle z-depth-0" height="35" src= <%= "../uploads/"+avatar %> > 
+                        <%}%>
+                    </div>
+                    <div class="col ml-3 mt-3">
+                        <div class="row ">
+                            <div class="font-weight-bold name">
+                                <%=username%>
+
+                            </div>
+                            <div class="ml-auto"><%=contacts[i].time%></div>
+                        </div>
+                        <div class="row text-truncate">
+                            <%=contacts[i].msg_text.slice(1,-1)%>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+                        </div>
+                    </div>
+                    
+        <div id="part-message" class="col sec-2">
+            <%- include ('part_msglist.ejs',{firstuser: firstuser,msg_list: msg_list,userid: userid})%>
+        </div>
+    <div class="col-2 d-none d-sm-block"></div>
+    </div>
+    <script type="text/javascript" src="../js/messenger.js"></script>
+</body>
+</html>

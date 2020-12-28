@@ -262,7 +262,8 @@ body,html{
 .md-form input[type="email"]:not(.browser-default).valid,
 .md-form input[type="email"]:not(.browser-default):focus:not([readonly]),
 .md-form input[type="password"]:not(.browser-default).valid,
-.md-form input[type="password"]:not(.browser-default):focus:not([readonly])
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly])
 {
         border-bottom: 1px solid #43FFBB;
         -webkit-box-shadow: 0 1px 0 0 #43FFBB;
@@ -342,4 +343,536 @@ body,html{
     margin: 0.5%;
     margin-top: 15px;
     border-radius: 15px 15px 0px 0px;
+}
+
+/* dropdown related css */
+.dropdown-toggle::after,
+.dropleft .dropdown-toggle::before{
+    display: none;
+}
+
+.dropdown-toggle{
+    cursor: pointer;
+}
+
+.dropdown-item:hover{
+    background:#2A3747;
+    color: white;
+}
+
+.dropdown-item{
+    color: white;
+}
+
+.dropdown-menu{
+    background-color: #181D27;
+}
+
+#content .dropdown-menu .dropdown-item{
+    font-size: large;
+}
+
+.suggest{
+    border-radius: 5px;
+    background-color: #181d27;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: 400px;
+    margin-top: 3px;
+    position: absolute;
+    width: 88%;
+    z-index: 50;
+}
+
+.suggest-item{
+    font-size: x-large;
+}
+
+.suggest-item:hover{
+    color: #43ffbb;
+    cursor:pointer;
+}
+
+/* loader related css */
+.loader {
+    height: 80%;
+    width: 100%;
+    overflow: hidden;
+    background-color:#0d131f;
+    position: absolute;
+}
+.loader>div{
+    height: 70px;
+    width: 70px;
+    border: 10px solid #212B3E;
+    border-top-color: #43ffbb;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+    animation: spin 1.5s infinite linear;
+}
+
+@keyframes spin{
+    100%{
+        transform: rotate(360deg);
+    }
+}
+/* dashboard related css */
+
+#content{
+    font-family: 'Hi Melody', cursive;
+    color: white;
+    font-size: large;
+} 
+
+#content .row {
+    margin: 0px;
+}
+
+#dash-layout .sec-1,
+#dash-layout .sec-3,
+#explore-layout .sec-1,
+#explore-layout .sec-3{
+    margin: 10px;
+    height: 78vh;
+    border-radius: 25px;
+    background-color: #212B3E;
+}
+
+#dash-layout .sec-2 .add-post-button,
+#dash-layout .sec-2 .post{
+    margin: 10px;
+    border-radius: 25px;
+    background-color: #212B3E;
+    font-size: x-large;
+}
+#dash-layout .sec-11,
+#dash-layout .sec-12,
+#dash-layout .sec-31,
+#dash-layout .sec-32{
+    height: 34vh;
+}
+
+#dash-layout .sec-12,
+#dash-layout .sec-32{
+    margin-top: 3vh;
+}
+
+#content .head{
+    font-size:xx-large;
+    color: #43ffbb;
+    font-weight: bold;
+    position: relative;
+    top: 8px;
+    margin-bottom: 5px;
+
+}
+
+#dash-layout .sec-11 .category-text,
+#dash-layout .sec-12 .people-text,
+#dash-layout .sec-31 .notif-text,
+#explore-layout .sec-1 .category-text{
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+#dash-layout .sec-32 .name{
+    cursor: pointer;
+    font-size: x-large;
+}
+#dash-layout .sec-31 .notif-text{
+    border-bottom: 1px solid #2A3747;
+    font-size: x-large;
+}
+
+#dash-layout .sec-31 .notif-text{
+    font-size: large;
+}
+
+#dash-layout .sec-11 .category-text:hover,
+#dash-layout .sec-12 .people-text:hover,
+#dash-layout .sec-32 .name:hover,
+#explore-layout .sec-1 .category-text:hover{
+    font-weight: bold;
+    color: #43ffbb;
+}
+
+#dash-layout .sec-11 .category-items,
+#dash-layout .sec-12 .people-items,
+#dash-layout .sec-31 .notif-items,
+#dash-layout .sec-32 .message-items{
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 29vh;
+    margin-top: 10px;
+}
+
+#dash-layout .sec-32 .msg-item{
+    border-bottom: 1px solid #2A3747;
+}
+
+#dash-layout .post-list{
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 71vh;
+}
+
+#dash-layout .sec-2 .post .people-text{
+    border-bottom:1px solid #2A3747;
+}
+#dash-layout .sec-2 .post .people-text .avatar>.fas{
+    color: #43ffbb;
+}
+
+#dash-layout .post-list .post-content,
+#dash-layout .post-list .post-content>img{
+    width: 100%;
+}
+ 
+#dash-layout .post-list .options{
+    margin-left: auto;
+}
+#dash-layout .post .carousel,
+#dash-layout .post #comment-form,
+#dash-layout .post .activity-row,
+#dash-layout .post .comment {
+    border-top: 1px solid #2A3747;
+}
+
+#dash-layout .post-list .activity-row .col{
+    margin: 5px;
+}
+
+#dash-layout .post-list .activity-row .col:hover{
+    background-color: #1A2130;
+    color:#43ffbb;
+    border-radius: 0px 0px 25px 25px;
+    cursor: pointer;
+}
+
+#dash-layout .post #comment-form .cmnt-submit-btn:hover{
+    color: #43ffbb;
+    cursor: pointer;
+}
+#dash-layout #comment-form{
+    display: none;
+}
+
+#dash-layout .post .comment-list .more-cmnt-btn {
+    color: #43ffbb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#dash-layout .post .comment{
+    font-size: large;
+}
+
+#dash-layout .add-post-button:hover{
+    color: #43ffbb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#dash-layout .post-list .username{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#dash-layout .post-list .username:hover{
+    font-weight: bold;
+    color: #43ffbb;
+    cursor: pointer;
+}
+#dash-layout .sec-3 .date {
+    font-size:medium;
+    position: relative;
+    top: -5px;
+    left: auto;
+    right: -76%;
+}
+
+#dash-layout .carousel img{
+    height: 42vh;
+}
+
+#dash-layout #follow-card{
+    margin: 10px;
+    border-radius: 20px;
+}
+
+
+#dash-layout .unfollow-btn{
+    background: #212B3E;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+#dash-layout .follow-btn{
+    background: #43ffbb;
+    border-radius: 18px;
+    cursor: pointer;
+    color: #15191C;
+}
+
+/* add post section related css */
+#addpost-layout .sec-1,
+#addpost-layout .sec-2
+{
+    margin: 10px;
+    height: 78vh;
+    border-radius: 25px;
+    background-color: #212B3E;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#addpost-layout .sec-1 .intro,
+#profile-layout .sec-1 .intro{
+    padding: 2px;
+    font-size: x-large;
+}
+
+#addpost-layout .sec-1 .intro i,
+#profile-layout .sec-1 .intro i{
+    margin-right: 5px;
+}
+
+#addpost-layout .sec-1 .intro span,
+#profile-layout .sec-1 .intro span{
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#addpost-layout .sec-1 .name,
+#addpost-layout .sec-2 label
+
+{
+    font-size: xx-large;
+}
+
+#addpost-layout .sec-2 .ui 
+{ 
+    font-size : large;
+}
+
+#addpost-layout .sec-2 .ui.dropdown .menu .item{
+font-size: x-large;
+}
+
+#addpost-layout .sec-1 i,
+#profile-layout .sec-1 i{
+    color: #43ffbb;
+}
+
+#addpost-layout .sec-2 .add-btn{
+    background-color: #43FFBB;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    font-size: x-large;
+    text-transform: none;
+    color: #0d131f;
+}
+
+
+.active-green-textarea-2 textarea.md-textarea {
+    border-bottom: 1px solid#43ffbb;
+    box-shadow: 0 1px 0 0#43ffbb;
+}
+.active-green-textarea-2.md-form label.active {
+    color:#43ffbb;
+}
+.active-green-textarea-2.md-form label {
+    color:#43ffbb;
+}
+.active-green-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color:#43ffbb;
+}
+.green-textarea textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid#43ffbb;
+    box-shadow: 0 1px 0 0#43ffbb;
+}
+
+#preview {
+    width: 97%;
+    border-bottom: 2px #1485e8;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+/* explore section related css */
+#explore-layout .sec-1 .category-items
+{
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+/* semantic ui dropdown settings */
+.ui.label {
+    background-color: #43ffbb !important;
+}
+
+.ui.selection.dropdown{
+    background: #1a2130 !important;
+}
+
+.menu.transition.visible {
+    background: #1a2130;
+}
+
+.ui.dropdown .menu .selected.item, .ui.dropdown.selected ,
+.ui.dropdown .menu > .item{
+    color:white !important;
+}
+
+/* messenger section related css */
+#messenger-layout .search{
+    border-radius: 50px;
+    color:grey;
+    background-color: #1a2130;
+}
+
+#messenger-layout .search input{
+    background: #1a2130;
+    border: transparent;
+    color: white;
+    width: 86%;
+    outline: none;
+}
+
+#messenger-layout .sec-1,
+#messenger-layout .sec-2{
+    margin: 10px;
+    height: 78vh;
+    border-radius: 25px;
+    background-color: #212B3E;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#messenger-layout .people-list{
+    margin-top: 5px;
+    height: 65vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.fa-user-circle{
+    color: #43ffbb;
+}
+
+#messenger-layout .sec-1 .name{
+    font-size: x-large;
+}
+
+#messenger-layout .sec-2 .name-2{
+    font-size: xx-large;
+    color:#43ffbb;
+}
+
+#messenger-layout .messenger-name,
+#messenger-layout .sec-1 .people-list >.row{
+    border-bottom: 1px solid #2A3747;
+}
+#messenger-layout .sec-1 .people-list >.row:hover > div:nth-child(2) > div:first-child{
+    color:#43ffbb ;
+    cursor: pointer;
+}
+
+#messenger-layout .sec-2 .msg-list{
+    height: 60vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+#messenger-layout .sec-2 .msg-form{
+    border-top: 1px solid #2A3747;
+}
+
+#messenger-layout .sec-2 .msg-list .my-message{
+    background:#43ffbb;
+    border-radius: 2px 2px 2px 10px;
+    width: max-content;
+    padding: 5px;
+    font-size: larger;
+    color: #212B3E;
+    max-width: 70%;
+}
+
+#messenger-layout .sec-2 .msg-list .his-message{
+    background:#0d131f;
+    border-radius: 2px 2px 10px 2px;
+    width: max-content;
+    padding: 5px;
+    max-width: 70%;
+    font-size: larger;
+}
+
+#messenger-layout .sec-2 .msg-list .his-time{
+    margin-top: -10px;
+    color: #43ffbb;
+}
+
+#messenger-layout .sec-2 .msg-list .my-time{
+    margin-top: -10px;
+    color: grey;
+    width: max-content;
+}
+
+#messenger-layout .sec-2 .msg-submit-btn{
+    cursor: pointer;
+}
+
+#messenger-layout .search-list{
+    position: absolute;
+    visibility: visible;
+    background: gray;
+    height: 200px;
+    z-index: 30;
+    border: red;
+    width: 88%;
+    margin-right: 1%;
+}
+
+/* profile related css */
+#profile-layout .sec-1 .name{
+    color: #43ffbb;
+}
+
+#profile-layout .edit-btn,
+#profile-layout .more-btn,
+#profile-layout .follow-btn,
+#profile-layout .unfollow-btn{
+    position: relative;
+    right: 0px;
+    background:#212B3E;
+    padding: 5px;
+    margin-bottom: 0px;
+    margin-top: auto;
+    border-radius: 8px;
+    font-size: large;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+#profile-layout .btn:hover{
+    color: white;
+}
+#profile-layout .unfollow-btn{
+    background:#43ffbb;
+    color: #0d131f !important;
+}
+
+#profile-layout .btn-row{
+    position: relative;
+    margin-left: auto;
 }

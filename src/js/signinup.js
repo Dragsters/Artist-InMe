@@ -1,4 +1,3 @@
-
 var sign_in_up_form = document.getElementsByClassName("sign-in-up-form");
 var signin_form = document.getElementsByClassName("signin-form-div");
 var signup_form = document.getElementsByClassName("signup-form-div");
@@ -35,9 +34,7 @@ fetch('http://localhost:3000/signmode')
         return response.json();
     })
     .then((data) => {
-        console.log(data);
         signInMode = data.signin;
-        console.log("sign mode", signInMode);
         if (signInMode === false)
             signup();
     });
@@ -55,13 +52,17 @@ $("#signin-form").submit(function (e) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            if (data.message === 'found')
+                location.href = '/u';
+            else
+                alert('Username or Password Incorrect');
         });
 });
 
 $("#signup-form").submit(function (e) {
     e.preventDefault();
     var inputvals = $('#signup-form input').serializeArray();
+    
     var data = {
         email: inputvals[0].value,
         username: inputvals[1].value,
@@ -77,6 +78,14 @@ $("#signup-form").submit(function (e) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            if (data.errno === 1062) {
+                var sqlMessage = data.sqlMessage;
+                if (sqlMessage.includes('username'))
+                    alert('username already exist');
+                else alert('email already exist');
+            }
+            if(data.message === 'success')
+                location.href = '/u';
         });
 });
+

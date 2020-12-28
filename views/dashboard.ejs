@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="dash-layout" class="row">
+        <div class="col-1 d-none d-sm-block">
+        </div>
+
+        <div class="col-2 sec-1 d-none d-lg-block">
+            <div class="sec-11">
+                <span class="head">Followed Categories</span>
+                <div class="category-items">
+                    <% if(categories.length !=0) {
+                        for(var i=0; i < categories.length; i++) {%>
+                        <span class="category-text text-capitalize"
+                            onclick="gotoCategory(<%= categories[i].category_id %>, '<%= categories[i].name%>')">
+                            <%= categories[i].name %>
+                        </span>
+                        <% }
+                    } else { %>
+                            <span class="category-text">
+                                You haven't followed any categories yet.
+                            </span>
+                    <%}%>
+                </div>
+            </div>
+            <div class="sec-12">
+                <span class="head">Followed Peoples</span>
+                <div class="people-items">
+                    <% if(folPeoples.length !=0) {
+                         for(var i=0; i < folPeoples.length; i++) {%>
+                        <div class="row people-text" onclick="gotoUser(<%= folPeoples[i].user_id %>)">
+                            <span class="nav-item avatar">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                    class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                            </span>
+                            &nbsp;
+                            <span>
+                                <%= folPeoples[i].username.slice(1,-1) %>
+                            </span>
+                        </div>
+                        <% }
+                    } else {%>
+                            <span class="row people-text">
+                                Peoples you followed will appear here
+                            </span>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+
+        <div class="col sec-2">
+            <div class="row add-post-button p-2" onclick="gotoAddPost()">
+                <div class="col-2">
+                    <span class="nav-item avatar">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </span>
+                </div>
+
+                <div class="col text-center ">
+                    <span class="mt-4" onclick=""> Add a new post</span>
+                </div>
+                <div class="col-2 text-center ">
+                    <i class="fas fa-plus pr-3"></i>
+                </div>
+            </div>
+            <div id="content-postlist" class="post-list">
+                <%- include ('part_postlist.ejs',{posts : posts, likedPost:likedPost})%>
+            </div>
+        </div> 
+
+         <div class="col-md-3 col-lg-2 sec-3 d-none d-md-block">
+            <div class="sec-31">
+                <span class="head">Notifications</span>
+                <div class="notif-items">
+                    <% for(var i=0; i<10; i++) {%>
+                        <div class="row notif-text" onclick="gotoNotif()">
+                            <span>notif <%=i%></span>
+                            <br>
+                            <span class="date">13 Aug</span>
+                        </div>
+                        <%}%>
+                </div>
+            </div>
+
+            <div class="sec-32">
+                <span class="head">Messages</span>
+                <div class="message-items">
+                  <%  for(var i=0; i< contacts.length; i++){
+                        var avatar = undefined;
+                        var username = undefined;
+                        var id = undefined;
+                        if(contacts[i].sender_id != userid){
+                            avatar = contacts[i].sender_avatar;
+                            username = contacts[i].sender_name.slice(1,-1);
+                            id = contacts[i].sender_id;
+                        }else{
+                            avatar = contacts[i].reciever_avatar;
+                            username = contacts[i].receiver_name.slice(1,-1);
+                            id = contacts[i].reciever_id;
+                        }
+                    %>
+                    <div class="row msg-item" onclick="gotoUserMessages(<%= id %>)">
+                        <div class="col-1 pl-0">
+                            <% if(avatar == null){%>
+                            <i class="fas fa-user-circle fa-2x mt-3"></i>
+                            <%}else{%>
+                                <img class="rounded-circle z-depth-0" height="35" src= "<%= '../uploads/'+avatar %>" > 
+                            <%}%>
+                        </div>
+                        <div class="col ml-3 mt-3">
+                            <div class="row ">
+                                <div class="font-weight-bold name">
+                                    <%=username%>
+                                </div>
+                                <div class="ml-auto"><%=contacts[i].time.slice(4)%></div>
+                            </div>
+                            <div class="row text-truncate">
+                                <%=contacts[i].msg_text.slice(1,-1)%>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div> 
+
+        <div class="col-1 d-none d-sm-block">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/dashboard.js"></script>
+</body>
+
+</html>

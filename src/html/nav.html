@@ -6,7 +6,7 @@
 <body>
     <div>
         <div id="nav-one" class="nav">
-            <a class="navbar-brand ml-2" href="/">
+            <a class="navbar-brand ml-2" href="/home">
                 <img src="../assets/mainlogo.svg">
             </a>
             <ul class="nav ml-auto nav-flex-icons">
@@ -18,10 +18,20 @@
                     <i class="fas fa-th fa-lg"></i></a>
                 </li>
                 <li class="nav-item avatar">
-                    <a class="nav-link pr-4 pt-2" href="#">
+                    <div class="nav-link pr-4 pt-2 dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
                             class="rounded-circle z-depth-0" alt="avatar image" height="35">
-                    </a>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="gotoProfile()">View Profile</div>
+                        <div class="dropdown-item">Edit Profile</div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Privacy Policy</a>
+                        <a class="dropdown-item" href="#">Terms of Service</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" onclick="logout()">Log Out</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -29,7 +39,7 @@
             <div class="col d-none d-sm-block">
             </div>
 
-            <div class="col tab active" onclick="dashboard()">
+            <div class="col tab active" onclick="getContent('dashboard')">
                 <span>
                     <i class="material-icons md-36">dashboard</i>
                 </span>
@@ -38,16 +48,16 @@
                 </span>
             </div>
 
-            <div class="col tab" onclick="addPost()">
+            <div class="col tab" onclick="getContent('addpost')">
                 <span>
                     <i class="material-icons md-36">post_add</i>
                 </span>
-                <span>
+                <span id="nav-addpost-btn">
                     Post
                 </span>
             </div>
 
-            <div class="col tab" onclick="explore()">
+            <div class="col tab" onclick="getContent('explore')">
                 <span>
                     <i class="material-icons md-36">batch_prediction</i>
                 </span>
@@ -56,7 +66,7 @@
                 </span>
             </div>
 
-            <div class="col tab" onclick="messenger()">
+            <div class="col tab" onclick="getContent('messenger')">
                 <span>
                     <i class="material-icons md-36">message</i>
                 </span>
@@ -65,7 +75,7 @@
                 </span>
             </div>
 
-            <div class="col tab" onclick="shop()">
+            <div class="col tab" onclick="getContent('shop')">
                 <span>
                     <i class="material-icons md-36">store</i>
                 </span>
@@ -74,11 +84,11 @@
                 </span>
             </div>
 
-            <div class="col tab" onclick="profile()">
+            <div class="col tab" onclick="getContent('profile')">
                 <span>
                     <i class="material-icons md-36">account_box</i>
                 </span>
-                <span>
+                <span id="nav-profile-btn">
                     Profile
                 </span>
             </div>

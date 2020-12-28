@@ -1,5 +1,5 @@
-var activeclass = document.querySelectorAll('#nav-two .tab');
 
+var activeclass = document.querySelectorAll('#nav-two .tab');
 for (var i = 0; i < activeclass.length; i++) {
     activeclass[i].addEventListener('click', activateClass);
 }
@@ -17,22 +17,26 @@ function activateClass(e) {
     }
 }
 
-function dashboard() {
-    $('#content').load('dashboard.html');
-}
-function addPost() {
-    $('#content').load('addpost.html');
-}
-function explore() {
-    $('#content').load('explore.html');
-}
-function messenger() {
-    $('#content').load('messenger.html');
-}
-function shop() {
-    $('#content').load('shop.html');
-}
-function profile() {
-    $('#content').load('profile.html');
+function getContent(Url) {
+    $('#content').load('loader.html');
+    if (Url == 'shop') {
+        $('#content').load('shop.html');
+        return;
+    }
+    $.get('/u/' + Url, function (html) {
+        $('#content').html(html);
+    });
 }
 
+function gotoProfile() {
+    document.getElementById('nav-profile-btn').click();
+}
+
+function logout() {
+    fetch('http://localhost:3000/logout')
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success == true)
+                location.href = '/';
+        });
+}

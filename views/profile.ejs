@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <div id="profile-layout" class="row">
+        <div class="col-2 d-none d-sm-block">
+        </div>
+        <div class="col-md-4 sec-1 col-sm-12">
+            <br>
+            <div class="row text-center">
+                <span class="nav-item avatar">
+                    <% if(profile.avatar==null){%>
+                        <i class="fas fa-user-circle fa-7x"></i>
+                        <%}else{%>
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded-circle z-depth-0" alt="avatar image" height="120">
+                            <%}%>
+                                <div class="avatar-upload-btn">
+                                    <i></i>
+                                </div>
+                </span>
+                <div>
+                    <div class=" mt-4 ml-4 ">
+                        <span class="row name font-weight-bold fa-lg">
+                            <%=profile.username.slice(1,-1)%>
+                        </span>
+                        <span class="row fa-md">
+                            <%if(profile.status_line==null){%>
+                                ...
+                                <%}else{%>
+                                    <%=profile.status_line%>
+                                        <%}%>
+                        </span>
+
+                    </div>
+
+                    <div class="btn-row ml-4">
+                        <%if(thisUser){%>
+                            <div class="edit-btn btn">Edit Profile</div>
+                            <%}else if(follow){%>
+                                <div class="follow-btn btn">Follow</div>
+                                <%}else{%>
+                                    <div class="unfollow-btn btn">Unfollow</div>
+                                    <%}%>
+                                        <div class="more-btn btn">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-1 row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+            <div>
+                <div class="row intro">
+                    <i class="material-icons m-36">business_center</i>
+                    Profession
+                    <span>
+                        <%=profile.profession%>
+                    </span>
+                </div>
+
+                <div class="row intro">
+                    <i class="material-icons m-36">place</i>
+                    From
+                    <span>
+                        <%=profile.city%>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md sec-2">
+
+        </div>
+        <div class="col-2 d-none d-sm-block"></div>
+    </div>
+    <script type="text/javascript" src="../js/profile.js"></script>
+</body>
+
+</html>

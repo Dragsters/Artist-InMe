@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     new WOW().init();
 });
@@ -14,14 +15,30 @@ anime.timeline({ loop: false })
         duration: 1200,
         delay: (el, i) => 3000 + 50 * i
     });
-    // for reversing the same animation.
-    // }).add({
-    //     targets: '.label-button .text-animate .letter',
-    //     translateX: [0, -30],
-    //     opacity: [1, 0],
-    //     easing: "easeInExpo",
-    //     duration: 1100,
-    //     delay: (el, i) => 100 + 30 * i
-    // });
+
+// for reversing the same animation.
+
+// }).add({
+//     targets: '.label-button .text-animate .letter',
+//     translateX: [0, -30],
+//     opacity: [1, 0],
+//     easing: "easeInExpo",
+//     duration: 1100,
+//     delay: (el, i) => 100 + 30 * i
+// });
+
+fetch('http://localhost:3000/getcookie/home')
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.cookie != "true") {
+            fetch('http://localhost:3000/getcookie/userid')
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.cookie)
+                    location.href = '/u';
+            });
+        }
+    });
+
 
 
