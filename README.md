@@ -8,7 +8,7 @@
 ![](https://img.shields.io/tokei/lines/github/Dragsters/Artist-InMe?color=%2316c79a)
 ![](https://img.shields.io/github/license/Dragsters/Artist-InMe?color=%231698e)
 
-![](https://img.shields.io/github/commit-activity/m/Dragsters/Artist-InMe?color=%2319456b)
+<!--![](https://img.shields.io/github/commit-activity/m/Dragsters/Artist-InMe?color=%2319456b)-->
 ![](https://img.shields.io/github/contributors/Dragsters/Artist-InMe?color=%23184d47)
 ![](https://img.shields.io/github/last-commit/Dragsters/Artist-InMe?color=%23295939)
 
